@@ -1,0 +1,95 @@
+body.login {
+	background: transparent;
+	padding: 50px 0;
+	box-sizing: border-box;
+	margin: 0 auto;
+}
+
+@media(min-width: 768px) {
+	.grupo {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 30px;
+	}
+}
+
+body.login div#login {
+	background-color: rgba(27, 31, 41, 0.7);
+	padding: 30px 40px;
+	max-width: 700px;
+	width: 70%;
+}
+
+body.login div#login h1 {
+	margin-bottom: 60px;
+	width: 100%;
+}
+
+@media(min-width: 768px) {
+	body.login div#login h1 {
+		margin-bottom: 0;
+	}
+}
+
+body.login div#login h1 a {
+	margin: 0 auto;
+	width: 250px;
+	height: 250px;
+	background-size: 100%;
+	background-position: center;
+	/* background-image: url('../img/logo.png'); */
+}
+
+body.login div#login form#loginform p {
+	color: #000000;
+}
+
+body.login div#login form#loginform p label {
+	color: #000000;
+}
+
+.login .privacy-policy-page-link {
+	margin: 10px 0;
+}
+
+body.login div#login form#loginform p.submit input#wp-submit {
+	background-color: #4182E0;
+	border: none;
+	transition: 1s;
+}
+
+body.login div#login form#loginform p.submit input#wp-submit:hover {
+	background-color: #014F7F;
+}
+
+.grupo-dos {
+	margin: 20px 0;
+}
+
+@media(min-width: 768px) {
+	.grupo-dos {
+		display: flex;
+		justify-content: space-between;
+		align-content: center;
+	}
+}
+
+body.login div#login p#nav {
+	margin: 5px 0;
+}
+
+body.login div#login p#backtoblog {
+	margin: 5px 0;
+}
+
+body.login div#login p#nav a, body.login div#login p#backtoblog a {
+	color: white;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+.privacy-policy-link {
+	font-size: 30;
+	color: white;
+}
