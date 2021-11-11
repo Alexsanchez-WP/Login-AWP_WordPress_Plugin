@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * Include files and send in to loginJS.js script
+ * 
+ * @version 1.0.0
+ * @global $wpdb
+ */
+
+if (!defined('ABSPATH')) die();
 
 if (!function_exists('awp_incude_files')) {
 
@@ -7,14 +15,14 @@ if (!function_exists('awp_incude_files')) {
     {
         global $wpdb;
 
-        $query = "SELECT * FROM {$wpdb->prefix}login_awp";
+        $query = "SELECT * FROM {$wpdb->prefix}register_directory";
 
         wp_localize_script(
             'loginJS',
             'login_imagenes',
             array(
-                'logo' => true,
-                'sliders' => array(plugins_url("assets/img/slider.jpg", __DIR__), plugins_url("assets/img/slider.jpg", __DIR__)),
+                'logo' => "https://www.gruporeysa.com/wp-content/uploads/2021/08/Logo_GrupoReysa-05-04.png",
+                'sliders' => array("https://www.gruporeysa.com/wp-content/uploads/2021/08/Login_image-02.jpg"),
             )
         );
     }

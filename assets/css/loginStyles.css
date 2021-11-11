@@ -1,3 +1,7 @@
+/*
+  These styles and tags are default for the wordpress login area 
+*/
+
 body.login {
 	background: transparent;
 	padding: 50px 0;
@@ -15,10 +19,11 @@ body.login {
 }
 
 body.login div#login {
-	background-color: rgba(27, 31, 41, 0.7);
+	background-color: rgba(255, 255, 255, 0.8);
 	padding: 30px 40px;
 	max-width: 700px;
 	width: 70%;
+	border-radius: 10px;
 }
 
 body.login div#login h1 {
@@ -38,7 +43,6 @@ body.login div#login h1 a {
 	height: 250px;
 	background-size: 100%;
 	background-position: center;
-	/* background-image: url('../img/logo.png'); */
 }
 
 body.login div#login form#loginform p {
@@ -84,12 +88,12 @@ body.login div#login p#backtoblog {
 }
 
 body.login div#login p#nav a, body.login div#login p#backtoblog a {
-	color: white;
+	color: gray;
 	font-weight: bold;
 	font-size: 16px;
 }
 
 .privacy-policy-link {
 	font-size: 30;
-	color: white;
+	color: gray;
 }

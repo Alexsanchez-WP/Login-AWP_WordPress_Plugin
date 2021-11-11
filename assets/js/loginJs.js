@@ -12,8 +12,7 @@ jQuery(function ($) {
     delay: 8000,
     transitionDuration: 3000,
   });
-  console.log(login_imagenes.logo);
   if (login_imagenes.logo) {
-    document.querySelector("body.login div#login h1 a").style.backgroundImage = "url('https://pruebas.test/wp-content/plugins/login_awp/assets/img/logo.png')";
+    document.querySelector("body.login div#login h1 a").style.backgroundImage = `url(${login_imagenes.logo})`;
   }
 });

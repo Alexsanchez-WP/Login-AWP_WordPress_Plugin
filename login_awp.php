@@ -1,22 +1,20 @@
 <?php
 
-/**
- * Plugin Name: Login A-WP
- * Plugin URI: 
- * Description: Este plugin modifica el área de login para el administrador de WordPress
- * Version: 1.0.1
- * Author: Alexsanchez-WP
- * Author URI: https://github.com/Alexsanchez-WP
- * Text Domain: login_awp
- * License: GPLv2
- * Released under the GNU General Public License (GPL)
- * https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
- */
+/*
+  Plugin Name: Login A-WP
+  Plugin URI: 
+  Description: Este plugin modifica el área de login para el administrador de WordPress
+  Version: 1.0.1
+  Author: Alexsanchez-WP
+  Author URI: https://github.com/Alexsanchez-WP
+  Text Domain: register_directory
+  License: GPLv2
+  Released under the GNU General Public License (GPL)
+  https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
+*/
 
 
-if (!defined('ABSPATH')) {
-    exit;
-}
+if (!defined('ABSPATH')) die();
 
 
 if (!function_exists('awp_admin_styles')) {
@@ -45,7 +43,7 @@ function admin_styles()
         'loginAdminScript',
         'login_text',
         array(
-            'text' => __('Seleccione imagen', 'login_awp')
+            'text' => __('Seleccione imagen', 'register_directory')
         )
     );
 }
@@ -53,13 +51,13 @@ function admin_styles()
 add_action('admin_enqueue_scripts', 'admin_styles');
 
 require_once plugin_dir_path(__FILE__) . 'inc/register.php';
-register_activation_hook(__FILE__, 'register_plugin_login_awp');
+register_activation_hook(__FILE__, 'register_plugin_register_directory');
 
 require_once plugin_dir_path(__FILE__) . 'inc/media.php';
 
 function register_sub_menu()
 {
-    add_submenu_page('themes.php', __('Datos para el Login', 'login_awp'), __('Login', 'login_awp'), 'manage_options', 'login-awp', 'call_sub_menu');
+    add_submenu_page('themes.php', __('Datos para el Login', 'register_directory'), __('Login', 'register_directory'), 'manage_options', 'login-awp', 'call_sub_menu');
 }
 add_action('admin_menu', 'register_sub_menu');
 
@@ -67,55 +65,55 @@ function call_sub_menu()
 {
 ?>
 
-<div id="form-login">
-    <div class="wrap">
-        <h1><?php esc_html_e(get_admin_page_title()); ?></h1>
+    <div id="form-login">
+        <div class="wrap">
+            <h1><?php esc_html_e(get_admin_page_title()); ?></h1>
 
-        <form metod="POST">
-            <table class="form-table">
-                <tbody>
-                    <tr>
-                        <th scope="row"><?php _e('Logo', 'login_awp') ?></th>
-                        <td>
-                            <div>
-                                <input class="regular-text code" type="url" id="upload-img" name="image">
-                                <button class="upload-img button">
-                                    <?php _e('Upload logo', 'login_awp') ?>
-                                </button>
-                            </div>
-                            <p class="description">
-                                <?php _e('Logo que se muestra en el formulario de login y/o registro', 'login_awp'); ?>
-                            </p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row"><?php _e('Imagen de fondo', 'login_awp') ?></th>
-                        <td>
-                            <div>
-                                <input class="regular-text code" type="url" id="upload-img-01" name="image">
-                                <button class="upload-img-01 button">
-                                    <?php _e('Upload image', 'login_awp') ?>
-                                </button>
-                            </div>
-                            <p class="description">
-                                <?php _e('Imagen para el slider de fondo en el área de login', 'login_awp'); ?>
-                                <code>1</code>
-                            </p>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <p class="submit">
-                <button class="button button-primary" title="<?php _e('Save more images', 'login_awp') ?>">
-                    <?php _e('Save changes', 'login_awp') ?>
-                </button>
-                <button class="button" id="more-images" title="<?php _e('Load more images', 'login_awp') ?>">
-                    <?php _e('Load more images +', 'login_awp') ?>
-                </button>
-            </p>
+            <form metod="POST">
+                <table class="form-table">
+                    <tbody>
+                        <tr>
+                            <th scope="row"><?php _e('Logo', 'register_directory') ?></th>
+                            <td>
+                                <div>
+                                    <input class="regular-text code" type="url" id="upload-img" name="image">
+                                    <button class="upload-img button">
+                                        <?php _e('Upload logo', 'register_directory') ?>
+                                    </button>
+                                </div>
+                                <p class="description">
+                                    <?php _e('Logo que se muestra en el formulario de login y/o registro', 'register_directory'); ?>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><?php _e('Imagen de fondo', 'register_directory') ?></th>
+                            <td>
+                                <div>
+                                    <input class="regular-text code" type="url" id="upload-img-01" name="image">
+                                    <button class="upload-img-01 button">
+                                        <?php _e('Upload image', 'register_directory') ?>
+                                    </button>
+                                </div>
+                                <p class="description">
+                                    <?php _e('Imagen para el slider de fondo en el área de login', 'register_directory'); ?>
+                                    <code>1</code>
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="submit">
+                    <button class="button button-primary" title="<?php _e('Save more images', 'register_directory') ?>">
+                        <?php _e('Save changes', 'register_directory') ?>
+                    </button>
+                    <button class="button" id="more-images" title="<?php _e('Load more images', 'register_directory') ?>">
+                        <?php _e('Load more images +', 'register_directory') ?>
+                    </button>
+                </p>
 
-        </form>
+            </form>
+        </div>
     </div>
-</div>
 <?php
 }
