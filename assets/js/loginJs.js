@@ -2,12 +2,13 @@ jQuery(function ($) {
   $("#login h1, #login form").wrapAll('<div class="grupo"></div>');
   $("#login #nav , #login #backtoblog").wrapAll('<div class="grupo-dos"></div>');
   $("body").vegas({
-    slides: login_imagenes.sliders.map((item) => {
-      return {
-        src: item,
-      };
-    }),
-    overlay: login_imagenes.ruta_plantilla + "/assets/img/overlays/05.png",
+    // slides: login_imagenes.sliders.map((item) => {
+    //   return {
+    //     src: item,
+    //   };
+    // }),
+    slides: [{ src: login_imagenes.sliders + "assets/img/slider.jpg"}],
+    overlay: login_imagenes.sliders + "assets/img/overlays/05.png",
     transition: ["fade", "zoomOut", "swirlLeft2"],
     delay: 8000,
     transitionDuration: 3000,

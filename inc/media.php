@@ -20,12 +20,11 @@ if (!function_exists('awp_incude_files')) {
         wp_localize_script(
             'loginJS',
             'login_imagenes',
-            array(
-                'logo' => "https://www.gruporeysa.com/wp-content/uploads/2021/08/Logo_GrupoReysa-05-04.png",
-                'sliders' => array("https://www.gruporeysa.com/wp-content/uploads/2021/08/Login_image-02.jpg"),
+             array(
+                // 'logo' => "https://www.gruporeysa.com/wp-content/uploads/2021/08/Logo_GrupoReysa-05-04.png",
+                'sliders' => plugin_dir_url(__DIR__),
             )
         );
     }
-
     add_action('login_enqueue_scripts', 'awp_incude_files', 10);
 }
