@@ -2,9 +2,8 @@
 
 /**
  * Include files and send in to loginJS.js script
- * 
+ * @since 1.0.0
  * @version 1.0.0
- * @global $wpdb
  */
 
 if (!defined('ABSPATH')) die();

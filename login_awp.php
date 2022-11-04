@@ -5,6 +5,8 @@
   Plugin URI: 
   Description: This plugin modifies the login area for WordPress admin
   Version: 1.0.0
+  Requires at least: 5.4
+  Requires PHP: 7.4
   Author: Alexsanchez-WP
   Author URI: https://github.com/Alexsanchez-WP
   Text Domain: login_awp
