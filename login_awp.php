@@ -23,12 +23,12 @@ if (!function_exists('login_awp_styles')) {
 
     function login_awp_styles()
     {
-        wp_enqueue_style('vegasCSS', plugins_url('/assets/css/vegas.min.css', __FILE__), array(), false);
-        wp_enqueue_style('loginCSS', plugins_url('/assets/css/loginStyles.css', __FILE__), array(), false);
+        wp_enqueue_style('vegasCSS', plugins_url('/public/css/vegas.min.css', __FILE__), array(), false);
+        wp_enqueue_style('loginCSS', plugins_url('/public/css/loginStyles.css', __FILE__), array(), false);
 
         wp_enqueue_script('jquery');
-        wp_enqueue_script('vegasJS', plugins_url('/assets/js/vegas.min.js', __FILE__), array('jquery'), '2.5.4', true);
-        wp_enqueue_script('loginJS', plugins_url('/assets/js/loginJs.js', __FILE__), array('jquery'), '1.0.0', true);
+        wp_enqueue_script('vegasJS', plugins_url('/public/js/vegas.min.js', __FILE__), array('jquery'), '2.5.4', true);
+        wp_enqueue_script('loginJS', plugins_url('/public/js/loginJs.js', __FILE__), array('jquery'), '1.0.0', true);
     }
 
     add_action('login_enqueue_scripts', 'login_awp_styles', 1);

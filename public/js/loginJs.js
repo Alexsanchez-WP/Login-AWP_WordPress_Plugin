@@ -2,8 +2,8 @@ jQuery(function ($) {
     $("#login h1, #login form").wrapAll('<div class="grupo"></div>');
     $("#login #nav , #login #backtoblog").wrapAll('<div class="grupo-dos"></div>');
     $("body").vegas({
-        slides: [{ src: login_imagenes.sliders + "assets/img/slider.jpg" }],
-        overlay: login_imagenes.sliders + "assets/img/overlay.png",
+        slides: [{ src: login_imagenes.sliders + "public/img/slider.jpg" }],
+        overlay: login_imagenes.sliders + "public/img/overlay.png",
         transition: ["fade", "zoomOut", "swirlLeft2"],
         delay: 8000,
         transitionDuration: 3000,

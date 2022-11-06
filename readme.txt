@@ -23,7 +23,7 @@ This plugin improves the login look for the website and defaults to the page log
 
 = Can I change the background image? =
 
-Yes, you can do it from directly change the image file located in `assets\img\slider.jpg`, remember that it is expected to have the same name.
+Yes, you can do it from directly change the image file located in `public\img\slider.jpg`, remember that it is expected to have the same name.
 
 = What if I don't have a logo? =
 
