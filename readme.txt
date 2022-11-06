@@ -35,7 +35,8 @@ Try reducing the size of the image or restoring the plugin to its initial versio
 
 == Screenshots ==
 
-1. Logo look
+1. Login with default logo
+2. Login wiht custom logo
 
 == Changelog ==
 
