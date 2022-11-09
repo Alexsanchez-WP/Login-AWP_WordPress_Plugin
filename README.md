@@ -1,4 +1,6 @@
-# Login - Plugin WordPress
+# Login - Plugin WordPress [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate/?hosted_button_id=32A55GWU7JKY4)
+
+| Download the latest version from the [wordpress marketplace](https://wordpress.org/plugins/login-awp/) or from [github releases](https://github.com/Alexsanchez-WP/Login-AWP_WordPress/release)
 
 ## Description
 
@@ -12,3 +14,5 @@ This plugin improves the login look for the website and defaults to the page log
 ## Frequently Asked Questions
 
 [Link Wiki](https://github.com/Alexsanchez-WP/Login-AWP_WordPress/wiki/Frequently-Asked-Questions)
+
+
