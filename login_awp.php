@@ -1,19 +1,19 @@
 <?php
 
-/*
-  Plugin Name: Login AWP
-  Plugin URI: 
-  Description: This plugin modifies the login area for WordPress admin
-  Version: 1.0.0
-  Requires at least: 5.4
-  Requires PHP: 7.4
-  Author: Alexsanchez-WP
-  Author URI: https://github.com/Alexsanchez-WP
-  Text Domain: login_awp
-  License: GPLv2
-  Released under the GNU General Public License (GPL)
-  https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
-*/
+/**
+ * Plugin Name: Login AWP
+ * Plugin URI: https://wordpress.org/plugins/login-awp
+ * Description: This plugin modifies the login area for WordPress admin
+ * Version: 1.0.0
+ * Requires at least: 5.4
+ * Requires PHP: 7.4
+ * Author: Alexsanchez-WP
+ * Author URI: https://github.com/Alexsanchez-WP
+ * Text Domain: login_awp
+ * License: GPLv2
+ * Released under the GNU General Public License (GPL)
+ * https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
+ */
 
 
 if (!defined('ABSPATH')) die();
