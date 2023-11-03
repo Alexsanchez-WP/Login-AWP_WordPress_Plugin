@@ -3,10 +3,10 @@ Contributors: alexanderwp
 Donate link: https://www.paypal.com/donate/?hosted_button_id=32A55GWU7JKY4
 Tags: login, improve login, nice login, customize, logo, custom login
 Requires at least: 5.4
-Tested up to: 6.1
-Stable tag: 1.0.0
+Tested up to: 6.3
+Stable tag: 2.0.0
 Requires PHP: 7.4
-License: GPLv2 or later
+License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html 
 
 This plugin improves the login look for the website and defaults to the page logo.

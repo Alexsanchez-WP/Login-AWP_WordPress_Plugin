@@ -15,4 +15,5 @@ This plugin improves the login look for the website and defaults to the page log
 
 [Link Wiki](https://github.com/Alexsanchez-WP/Login-AWP_WordPress/wiki/Frequently-Asked-Questions)
 
-
+## About 
+[Vegas2 JS](https://vegas.jaysalvat.com/)

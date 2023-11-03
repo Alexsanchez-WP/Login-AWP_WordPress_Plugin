@@ -1,0 +1,8 @@
+# not export folders
+tags/ export-ignore
+assets/ export-ignore
+trunk/ export-ignore
+
+# type files
+*.jpg binary
+*.png binary
