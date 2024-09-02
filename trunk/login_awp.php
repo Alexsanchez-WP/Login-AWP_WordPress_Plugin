@@ -12,7 +12,7 @@
  * Text Domain: login_awp
  * License: GPLv2
  * Released under the GNU General Public License (GPL)
- * https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
+ * https://www.gnu.org/licenses/gpl-3.0.html
  */
 
 
