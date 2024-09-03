@@ -1,14 +1,27 @@
-FROM wordpress
+FROM wordpress:apache
 
-RUN apt update && apt upgrade -y && curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && chmod +x wp-cli.phar && mv wp-cli.phar /usr/local/bin/wp
+RUN apt-get update && apt-get install -y \
+    less \
+    mariadb-client \
+    sudo \
+    && rm -rf /var/lib/apt/lists/*
 
-RUN wp config create --dbname=$WORDPRESS_DB_USER --dbuser=$WORDPRESS_DB_USER --dbpass=$WORDPRESS_DB_PASSWORD
+ADD https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar .
 
-RUN wp core install --url=$URL --title=$TITLE --admin_user=$ADMIN_USER --admin_password=$ADMN_PASSWORD --admin_email=$ADMIN_EMAIL
+RUN chmod +x wp-cli.phar && mv wp-cli.phar /usr/local/bin/wp
 
-RUN cp /var/www/html/wp-content/wp-config-docker.php /var/www/html/wp-content/wp-config.php
+WORKDIR /usr/src/wordpress
 
-COPY . /var/www/html/wp-content/plugins/login_awp
+RUN set -eux; \
+	find /etc/apache2 -name '*.conf' -type f -exec sed -ri  \
+    -e "s!/var/www/html!$PWD!g" \
+    -e "s!Directory /var/www/!Directory $PWD!g" '{}' +; \
+    cp -s wp-config-docker.php wp-config.php
 
-RUN wp plugin activate login_awp
+COPY trunk/ ./wp-content/plugins/login-awp/
 
+COPY deployment/init.sh /usr/local/bin/init.sh
+
+RUN chmod +x /usr/local/bin/init.sh
+
+ENTRYPOINT ["/usr/local/bin/init.sh"]

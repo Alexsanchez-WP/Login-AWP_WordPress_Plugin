@@ -1,5 +1,3 @@
-.svn/*
 tags/*
-assets/*
-trunk/*
-compose/*
+
+.svn/*

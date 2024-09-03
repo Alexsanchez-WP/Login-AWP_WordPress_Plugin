@@ -1,34 +1,38 @@
-version: "3.1"
-
 services:
   wordpress:
     build:
       context: .
-    ports:
-      - 8080:80
-    environment:
-      WORDPRESS_DB_HOST: db
-      WORDPRESS_DB_USER: ${DB_USER}
-      WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
-      WORDPRESS_DB_NAME: ${DB_NAME}
-    volumes:
-      - login_awp_wordpress:/var/www/html
+      dockerfile: Dockerfile
     depends_on:
-      - db
+      - mysql
+    ports:
+      - 80:80
     env_file:
       - .env
-
-
-  db:
-    image: mysql:5.7
-    environment:
-      MYSQL_DATABASE: ${DB_NAME}
-      MYSQL_USER: ${DB_USER}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
-      MYSQL_RANDOM_ROOT_PASSWORD: "1"
     volumes:
-      - login_awp_db:/var/lib/mysql
+      - wordpress:/usr/src/wordpress
+      - ./trunk/:/usr/src/wordpress/wp-content/plugins/login-awp/
+
+  mysql:
+    image: mysql:8.0
+    env_file:
+      - .env
+    volumes:
+      - mysql:/var/lib/mysql
+
+  adminer:
+    depends_on:
+      - mysql
+    image: adminer
+    ports:
+      - 8080:8080
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - 1025:1025
+      - 8025:8025
 
 volumes:
-  login_awp_wordpress:
-  login_awp_db:
+  wordpress:
+  mysql:
