@@ -1,8 +1,8 @@
 # not export folders
 /* export-ignore
-!trunk/**
-!LICENSE.md
-!README.md
+\!trunk/**
+\!LICENSE.md
+\!README.md
 
 # type files
 *.jpg binary
