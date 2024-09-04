@@ -1,7 +1,8 @@
 # not export folders
-tags/ export-ignore
-assets/ export-ignore
-trunk/ export-ignore
+/* export-ignore
+!trunk/**
+!LICENSE.md
+!README.md
 
 # type files
 *.jpg binary
