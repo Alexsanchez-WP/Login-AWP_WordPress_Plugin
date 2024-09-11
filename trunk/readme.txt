@@ -41,5 +41,9 @@ Try reducing the size of the image or restoring the plugin to its initial versio
 
 == Changelog ==
 
-= 1.0 =
+= 1.0.0 =
 * First stable version
+
+= 1.1.0 =
+* Fix: Site icon loads to show on login when custom icon exists
+
