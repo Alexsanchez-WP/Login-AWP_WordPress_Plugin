@@ -1,8 +1,15 @@
-# not export folders
-/* export-ignore
-\!trunk/**
-\!LICENSE.md
-\!README.md
+# Exclude all files from export-ignore
+assets/     export-ignore
+deployment/ export-ignore
+tags/       export-ignore
+
+.gitattributes   export-ignore
+.gitignore       export-ignore
+.env             export-ignore
+.gitmodules      export-ignore
+.dockerignore    export-ignore
+docker-compose.* export-ignore
+Dockerfile       export-ignore
 
 # type files
 *.jpg binary
