@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/donate/?hosted_button_id=32A55GWU7JKY4
 Tags: login, customize, custom login
 Requires at least: 5.4
 Tested up to: 6.6
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 Requires PHP: 7.4
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html 
@@ -41,5 +41,9 @@ Try reducing the size of the image or restoring the plugin to its initial versio
 
 == Changelog ==
 
-= 1.0 =
+= 1.0.0 =
 * First stable version
+
+= 1.1.0 =
+* Fix: Site icon loads to show on login when custom icon exists
+

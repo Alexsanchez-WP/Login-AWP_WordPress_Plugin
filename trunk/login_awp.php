@@ -4,13 +4,12 @@
  * Plugin Name: Login AWP
  * Plugin URI: https://wordpress.org/plugins/login-awp
  * Description: This plugin modifies the login area for WordPress admin
- * Version: 2.0.0
+ * Version: 1.1.0
  * Requires at least: 5.4
  * Requires PHP: 7.4
  * Author: Alexsanchez-WP
  * Author URI: https://github.com/Alexsanchez-WP
  * Text Domain: login_awp
- * Domain Path: /languages
  * License: GPLv2
  * Released under the GNU General Public License (GPL)
  * https://www.gnu.org/licenses/gpl-3.0.html
@@ -34,11 +33,6 @@ if (!function_exists('login_awp_styles')) {
 
     add_action('login_enqueue_scripts', 'login_awp_styles', 1);
 }
-
-# Register plugin
-
-require_once plugin_dir_path(__FILE__) . 'inc/register.php';
-register_activation_hook(__FILE__, 'register_plugin_register_directory');
 
 # Include consult logo site
 require_once plugin_dir_path(__FILE__) . 'inc/media.php';

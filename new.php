@@ -1,3 +1,4 @@
+<?php 
 
 if (!function_exists('awp_admin_styles')) {
 
