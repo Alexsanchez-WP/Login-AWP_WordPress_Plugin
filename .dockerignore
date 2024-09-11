@@ -8,5 +8,6 @@ tests/*
 deployments/*
 k8s/*
 tags/*
+refactor/*
 
 .gitignore

@@ -8,7 +8,7 @@
  * Requires at least: 5.4
  * Requires PHP: 7.4
  * Author: Alexsanchez-WP
- * Author URI: https://github.com/Alexsanchez-WP
+ * Author URI: https://github.com/AWP-Software
  * Text Domain: login_awp
  * Domain Path: /languages
  * License: GPLv2
