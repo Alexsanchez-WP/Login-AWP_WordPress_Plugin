@@ -1,0 +1,9 @@
+# not export folders
+/* export-ignore
+\!trunk/**
+\!LICENSE.md
+\!README.md
+
+# type files
+*.jpg binary
+*.png binary
