@@ -71,12 +71,15 @@ class PublicRegister
 
     public function loginAwpLocalize(): void
     {
+        $upload_img_logo = get_option(option: 'login_awp_logo_url') ?? get_site_icon_url();
+        $upload_img_back = get_option(option: 'login_awp_background_url') ?? $this->publicPath;
+
         wp_localize_script(
             handle: 'loginJS',
             object_name: 'login_imagenes',
             l10n: array(
-                'logo' => esc_url(get_site_icon_url()),
-                'sliders' => esc_url($this->publicPath),
+                'logo' => esc_url(url: $upload_img_logo),
+                'sliders' => esc_url(url: $upload_img_back),
             )
         );
     }

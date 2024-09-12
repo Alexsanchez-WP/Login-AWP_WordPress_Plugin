@@ -2,14 +2,16 @@
 
 /**
  * Drop table and remove data
- * 
- * @author Alexsanchez-WP <alexsanchez.wp@gmail.com>
+ *
+ * @author AWP-Software
  * @since 2.0.0
- * @version 1.0.0
+ * @version 2.0.0
  * @global $wpdb
  */
 
-if (!defined('WP_UNINSTALL_PLUGIN')) die();
+if (!defined('WP_UNINSTALL_PLUGIN')) {
+    die('You are not allowed to uninstall the plugin');
+}
 
 global $wpdb;
 

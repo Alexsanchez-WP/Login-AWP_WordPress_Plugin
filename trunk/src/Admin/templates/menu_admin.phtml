@@ -15,58 +15,65 @@ if (!defined('ABSPATH')) {
 }
 
 $domain = LOGIN_AWP_DOMAIN;
+$upload_img_logo = get_option(option: 'login_awp_logo_url');
+$upload_img_back = get_option(option: 'login_awp_background_url');
 
 ?>
+
+
 
 <div style="margin: 50px;">
     <div id="form-login">
         <div class="wrap">
             <h1><?php esc_html_e(get_admin_page_title()); ?></h1>
             <form method="POST" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
-                <div>
-                    <div class="row">
-                        <h2><?php _e('Logo', $domain) ?></h2>
+                <div class="flex-container">
+                    <div class="flex-item">
+                        <div class="row">
+                            <h2><?php _e('Logo', $domain) ?></h2>
+                        </div>
+                        <div>
+                            <input class="regular-text code mg-b20" type="url" id="upload-img-logo"
+                                name="upload-img-logo">
+                            <button class="upload-img-logo button mg-b20" type="button">
+                                <?php _e('Upload logo', $domain) ?>
+                            </button>
+                            <p class="description mg-b20">
+                                <?php _e('Logo que se muestra en el formulario de login y/o registro', $domain); ?>
+                            </p>
+                            <div id="upload-img-logo-container">
+                                <?php if (isset($upload_img_logo)) { ?>
+                                    <img src="<?php echo esc_url($upload_img_logo); ?>"
+                                        style="max-width: 250px; height: auto;" alt="">
+                                <?php } ?>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <input class="regular-text code" type="url" id="upload-img-logo" name="upload-img-logo">
-                        <button class="upload-img-logo button" type="button">
-                            <?php _e('Upload logo', $domain) ?>
-                        </button>
-                        <p class="description">
-                            <?php _e('Logo que se muestra en el formulario de login y/o registro', $domain); ?>
+                    <div class="flex-item">
+                        <div class="row">
+                            <h2>
+                                <?php _e('Imagen de fondo', $domain) ?>
+                            </h2>
+                        </div>
+                        <div>
+                            <input class="regular-text code mg-b20" type="url" id="upload-img-back"
+                                name="upload-img-back">
+                            <button class="upload-img-back button mg-b20" type="button">
+                                <?php _e('Upload image', $domain) ?>
+                            </button>
+                        </div>
+                        <p class="description mg-b20">
+                            <?php _e('Imagen para el slider de fondo en el área de login', $domain); ?>
                         </p>
-                        <div id="upload-img-logo-container">
-                            <?php if (isset($upload_img_logo)) { ?>
-                                <img src="<?php echo esc_url($upload_img_logo); ?>" style="max-width: 250px; height: auto;"
+                        <div id="upload-img-back-container">
+                            <?php if (isset($upload_img_back)) { ?>
+                                <img src="<?php echo esc_url($upload_img_back); ?>" style="max-width: 250px; height: auto;"
                                     alt="">
                             <?php } ?>
                         </div>
                     </div>
                 </div>
-                <div>
-                    <div scope="row">
-                        <h2>
-                            <?php _e('Imagen de fondo', $domain) ?>
-                        </h2>
-                    </div>
-                    <div>
-                        <input class="regular-text code" type="url" id="upload-img-back" name="upload-img-back">
-                        <button class="upload-img-back button" type="button">
-                            <?php _e('Upload image', $domain) ?>
-                        </button>
-                    </div>
-                    <p class="description">
-                        <?php _e('Imagen para el slider de fondo en el área de login', $domain); ?>
-                    </p>
-                    <div id="upload-img-back-container">
-                        <?php if (isset($upload_img_back)) { ?>
-                            <img src="<?php echo esc_url($upload_img_back); ?>" style="max-width: 250px; height: auto;"
-                                alt="">
-                        <?php } ?>
-                    </div>
-                </div>
                 <div class="submit">
-
                     <?php wp_nonce_field(
                         action: 'login_awp_form_nonce',
                         name: 'login_awp_form_nonce_field'
@@ -74,7 +81,8 @@ $domain = LOGIN_AWP_DOMAIN;
 
                     <input type="hidden" name="action" value="login_awp_form_action">
 
-                    <button type="submit" class="button button-primary" title="<?php _e('Save images', $domain) ?>">
+                    <button name="submit_button_login_awp" type="submit" class="button button-primary"
+                        title="<?php _e('Save images', $domain) ?>">
                         <?php _e('Save changes', $domain) ?>
                     </button>
                 </div>

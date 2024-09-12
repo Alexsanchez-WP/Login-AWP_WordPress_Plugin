@@ -5,6 +5,7 @@ jQuery(function ($) {
   );
   $("body").vegas({
     slides: [{ src: login_imagenes.sliders + "assets/img/slider.jpg" }],
+    // TODO: Vallidate url 
     overlay: login_imagenes.sliders + "assets/img/overlay.png",
     transition: ["fade", "zoomOut", "swirlLeft2"],
     delay: 8000,
