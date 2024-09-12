@@ -2,4 +2,4 @@ tags/*
 .svn/*
 refactor/*
 composer.lock
-vendor/*
+**/vendor/*
