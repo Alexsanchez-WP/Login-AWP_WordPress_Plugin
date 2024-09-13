@@ -18,6 +18,9 @@ class AdminRegister
     public string $domain = LOGIN_AWP_DOMAIN;
     public string $publicPath = LOGIN_AWP_DIR_URL;
 
+    public static string $imgLogoName = 'login_awp_logo_url';
+    public static string $imgBackName = 'login_awp_background_url';
+
     public function load(): void
     {
         add_action(
@@ -59,6 +62,7 @@ class AdminRegister
     public function loginAwpSubMenuTemplate(): void
     {
         $admin_template = plugin_dir_path(file: __FILE__) . 'templates/menu_admin.phtml';
+
         if (\file_exists(filename: $admin_template)) {
             wp_create_nonce(action: 'login_awp_form_nonce');
             require_once $admin_template;
@@ -97,6 +101,7 @@ class AdminRegister
 
     public function loginAwpAdminform(): void
     {
+        // TODO delete images
         if (
             !isset($_POST['login_awp_form_nonce_field']) ||
             !wp_verify_nonce(
@@ -121,7 +126,7 @@ class AdminRegister
                 $message .= $this->updateOption(
                     upload_img: $upload_img_logo,
                     message: 'logo_status',
-                    db_file: 'login_awp_logo_url'
+                    db_file: self::$imgLogoName
                 );
             }
 
@@ -132,7 +137,7 @@ class AdminRegister
                 $message .= $this->updateOption(
                     upload_img: $upload_img_back,
                     message: 'background_status',
-                    db_file: 'login_awp_background_url'
+                    db_file: self::$imgBackName
                 );
             }
 

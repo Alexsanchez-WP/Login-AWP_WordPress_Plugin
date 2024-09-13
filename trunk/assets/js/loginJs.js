@@ -4,9 +4,8 @@ jQuery(function ($) {
     '<div class="grupo-dos"></div>'
   );
   $("body").vegas({
-    slides: [{ src: login_imagenes.sliders + "assets/img/slider.jpg" }],
-    // TODO: Vallidate url 
-    overlay: login_imagenes.sliders + "assets/img/overlay.png",
+    slides: [{ src: login_imagenes.sliders }],
+    overlay: login_imagenes.overlay,
     transition: ["fade", "zoomOut", "swirlLeft2"],
     delay: 8000,
     transitionDuration: 3000,

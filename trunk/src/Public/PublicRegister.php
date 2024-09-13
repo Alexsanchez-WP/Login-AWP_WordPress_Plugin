@@ -12,6 +12,8 @@ declare(strict_types=1);
 
 namespace Login\Awp\Public;
 
+use Login\Awp\Admin\AdminRegister;
+
 class PublicRegister
 {
     public string $publicPath = LOGIN_AWP_DIR_URL;
@@ -71,8 +73,10 @@ class PublicRegister
 
     public function loginAwpLocalize(): void
     {
-        $upload_img_logo = get_option(option: 'login_awp_logo_url') ?? get_site_icon_url();
-        $upload_img_back = get_option(option: 'login_awp_background_url') ?? $this->publicPath;
+        $upload_img_logo = get_option(AdminRegister::$imgLogoName, null) ??
+            get_site_icon_url();
+        $upload_img_back = get_option(AdminRegister::$imgBackName, null) ??
+            $this->publicPath . 'assets/img/slider.jpg';
 
         wp_localize_script(
             handle: 'loginJS',
@@ -80,6 +84,7 @@ class PublicRegister
             l10n: array(
                 'logo' => esc_url(url: $upload_img_logo),
                 'sliders' => esc_url(url: $upload_img_back),
+                'overlay' => esc_url(url: $this->publicPath . 'assets/img/overlay.png')
             )
         );
     }

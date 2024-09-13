@@ -8,6 +8,9 @@
  * @autor AWP-Software
  * @since 2.0.0
  * @version 2.0.0
+ * @param string $domain
+ * @param string $upload_img_logo
+ * @param string $upload_img_back
  */
 
 if (!defined('ABSPATH')) {
@@ -15,12 +18,10 @@ if (!defined('ABSPATH')) {
 }
 
 $domain = LOGIN_AWP_DOMAIN;
-$upload_img_logo = get_option(option: 'login_awp_logo_url');
-$upload_img_back = get_option(option: 'login_awp_background_url');
+$upload_img_logo = get_option(option: self::$imgLogoName);
+$upload_img_back = get_option(option: self::$imgBackName);
 
 ?>
-
-
 
 <div style="margin: 50px;">
     <div id="form-login">
