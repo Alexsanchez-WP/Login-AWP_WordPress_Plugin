@@ -73,9 +73,14 @@ class PublicRegister
 
     public function loginAwpLocalize(): void
     {
-        $upload_img_logo = get_option(AdminRegister::$imgLogoName, null) ??
+        $upload_img_logo = get_option(option: AdminRegister::$imgLogoName);
+        $upload_img_logo = isset($upload_img_logo) && !empty($upload_img_logo) ?
+            $upload_img_logo :
             get_site_icon_url();
-        $upload_img_back = get_option(AdminRegister::$imgBackName, null) ??
+
+        $upload_img_back = get_option(option: AdminRegister::$imgBackName);
+        $upload_img_back = isset($upload_img_back) && !empty($upload_img_back) ?
+            $upload_img_back :
             $this->publicPath . 'assets/img/slider.jpg';
 
         wp_localize_script(

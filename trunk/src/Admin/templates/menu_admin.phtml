@@ -18,8 +18,8 @@ if (!defined('ABSPATH')) {
 }
 
 $domain = LOGIN_AWP_DOMAIN;
-$upload_img_logo = get_option(option: self::$imgLogoName, default_value: null);
-$upload_img_back = get_option(option: self::$imgBackName, default_value: null);
+$upload_img_logo = get_option(option: self::$imgLogoName);
+$upload_img_back = get_option(option: self::$imgBackName);
 
 ?>
 
@@ -43,7 +43,7 @@ $upload_img_back = get_option(option: self::$imgBackName, default_value: null);
                                 <?php _e('Logo displayed on the login and/or registration form', $domain); ?>
                             </p>
                             <div id="upload-img-logo-container">
-                                <?php if (isset($upload_img_logo)) { ?>
+                                <?php if (isset($upload_img_logo) && !empty($upload_img_logo)) { ?>
                                     <button name="delete-upload-img-logo-button" class="delete-img-logo button mg-b20">
                                         <?php _e('Delete image', $domain) ?>
                                     </button>
@@ -69,7 +69,7 @@ $upload_img_back = get_option(option: self::$imgBackName, default_value: null);
                             <?php _e('Image of background slider in login area', $domain); ?>
                         </p>
                         <div id="upload-img-back-container">
-                            <?php if (isset($upload_img_back)) { ?>
+                            <?php if (isset($upload_img_back) && !empty($upload_img_back)) { ?>
                                 <button name="delete-upload-img-back-button" class="delete-img-logo button mg-b20">
                                     <?php _e('Delete image', $domain) ?>
                                 </button>
@@ -88,7 +88,7 @@ $upload_img_back = get_option(option: self::$imgBackName, default_value: null);
 
                     <button name="submit_button_login_awp" type="submit" class="button button-primary"
                         title="<?php _e('Save images', $domain) ?>">
-                        <?php _e('Save changes', $domain) ?>
+                        <?php _e('Save images', $domain) ?>
                     </button>
                 </div>
             </form>
