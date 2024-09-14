@@ -2,7 +2,6 @@
 assets/     export-ignore
 deployment/ export-ignore
 tags/       export-ignore
-public/     export-ignore
 refactor/   export-ignore
 
 .gitattributes   export-ignore
@@ -12,8 +11,6 @@ refactor/   export-ignore
 .dockerignore    export-ignore
 docker-compose.* export-ignore
 Dockerfile       export-ignore
-new.php          export-ignore
-uninstall.php    export-ignore
 
 # type files
 *.jpg binary
