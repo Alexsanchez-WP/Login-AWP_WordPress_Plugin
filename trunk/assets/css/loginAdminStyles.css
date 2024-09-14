@@ -12,6 +12,11 @@
   margin: 0 10px;
 }
 
+.login-awp-img {
+  max-width: 250px;
+  height: auto;
+}
+
 .mg-b20 {
   margin-bottom: 20px !important;
 }

@@ -93,7 +93,8 @@ class AdminRegister
             handle: 'loginAdminScript',
             object_name: 'login_text',
             l10n: array(
-                'text' => __(text: 'Seleccione imagen', domain: $this->domain)
+                'text' => __(text: 'Select the image', domain: $this->domain),
+                'delete_button' => __(text: 'Delete image', domain: $this->domain)
             )
         );
     }
@@ -101,7 +102,7 @@ class AdminRegister
 
     public function loginAwpAdminform(): void
     {
-        // TODO delete images
+
         if (
             !isset($_POST['login_awp_form_nonce_field']) ||
             !wp_verify_nonce(
@@ -112,11 +113,13 @@ class AdminRegister
             wp_die(message: __(text: 'Verification failed', domain: $this->domain));
         }
 
-        if (isset($_POST['submit_button_login_awp'])) {
+        $message = "";
+        $upload_img_logo = $_POST["upload-img-logo"];
+        $upload_img_back = $_POST["upload-img-back"];
+        $delete_img_logo = $_POST["delete-upload-img-logo-button"];
+        $delete_img_back = $_POST["delete-upload-img-back-button"];
 
-            $upload_img_logo = $_POST["upload-img-logo"];
-            $upload_img_back = $_POST["upload-img-back"];
-            $message = "";
+        if (isset($_POST['submit_button_login_awp'])) {
 
             if (
                 isset($upload_img_logo) &&
@@ -140,10 +143,18 @@ class AdminRegister
                     db_file: self::$imgBackName
                 );
             }
-
-            wp_redirect(location: sanitize_url(url: $_POST["_wp_http_referer"] . $message));
-            exit;
         }
+
+        if (isset($delete_img_logo) && !is_null(value: $delete_img_logo)) {
+            delete_option(option: self::$imgLogoName);
+        }
+
+        if (isset($delete_img_back) && !is_null(value: $delete_img_back)) {
+            delete_option(option: self::$imgBackName);
+        }
+
+        wp_redirect(location: sanitize_url(url: $_POST["_wp_http_referer"] . $message));
+        exit;
     }
 
     /**
@@ -154,7 +165,7 @@ class AdminRegister
      * @param string $db_file
      * @return string
      */
-    private function updateOption(string $upload_img, string $message, string $db_file): string
+    private function updateOption($upload_img, $message, $db_file): string
     {
         $status = "&{$message}=error";
         $img_back = sanitize_text_field(str: $upload_img);

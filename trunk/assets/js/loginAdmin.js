@@ -5,6 +5,7 @@
 
 window.addEventListener("load", () => {
   const formLogin = document.querySelector("#form-login");
+
   if (formLogin) {
     load_images(formLogin);
   }
@@ -29,15 +30,21 @@ const load_images = (formLogin) => {
       });
 
       mediaUploader.on("select", function () {
-        console.log(`#${event.target.classList[0]}`);
-        attachment = mediaUploader.state().get("selection").first().toJSON();
+        const attachment = mediaUploader
+          .state()
+          .get("selection")
+          .first()
+          .toJSON();
 
         document.querySelector(`#${event.target.classList[0]}`).value =
           attachment.url;
-
         document.querySelector(
           `#${event.target.classList[0]}-container`
-        ).innerHTML = `<img src="${attachment.url}" style="max-width: 250px; height: auto;" alt="">`;
+        ).innerHTML = `
+        <button name="delete-${event.target.classList[0]}-button" class="delete-img-logo button mg-b20">
+                ${login_text.delete_button}
+        </button>
+        <img src="${attachment.url}" class="login-awp-img" alt="">`;
       });
 
       mediaUploader.open();

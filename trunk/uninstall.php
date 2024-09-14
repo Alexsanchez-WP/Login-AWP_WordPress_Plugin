@@ -8,9 +8,9 @@
  * @version 2.0.0
  */
 
-// if (!defined('WP_UNINSTALL_PLUGIN')) {
-//     die('You are not allowed to uninstall the plugin');
-// }
+if (!defined(constant_name: 'WP_UNINSTALL_PLUGIN')) {
+    die('You are not allowed to uninstall the plugin');
+}
 
 require_once __DIR__ . '/vendor/autoload.php';
 

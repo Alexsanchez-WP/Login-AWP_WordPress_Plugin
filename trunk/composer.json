@@ -1,27 +1,19 @@
 {
-    "name": "login/awp",
-    "description": "This plugin improves the login look for the website and defaults to the page logo.",
-    "type": "project",
-    "require-dev": {
-        "johnpbloch/wordpress": "^6.6"
-    },
-    "license": "GPLv3",
-    "autoload": {
-        "psr-4": {
-            "Login\\Awp\\": "src/"
-        }
-    },
-    "authors": [
-        {
-            "name": "AWP-Software",
-            "email": "alexsanchez.wp@gmail.com"
-        }
-    ],
-    "minimum-stability": "stable",
-    "require": {},
-    "config": {
-        "allow-plugins": {
-            "johnpbloch/wordpress-core-installer": false
-        }
+  "name": "login/awp",
+  "description": "This plugin improves the login look for the website and defaults to the page logo.",
+  "type": "project",
+  "license": "GPLv3",
+  "autoload": {
+    "psr-4": {
+      "Login\\Awp\\": "src/"
     }
+  },
+  "authors": [
+    {
+      "name": "AWP-Software",
+      "email": "alexsanchez.wp@gmail.com"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {}
 }

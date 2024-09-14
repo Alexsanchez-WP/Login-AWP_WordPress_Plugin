@@ -18,8 +18,8 @@ if (!defined('ABSPATH')) {
 }
 
 $domain = LOGIN_AWP_DOMAIN;
-$upload_img_logo = get_option(option: self::$imgLogoName);
-$upload_img_back = get_option(option: self::$imgBackName);
+$upload_img_logo = get_option(option: self::$imgLogoName, default_value: null);
+$upload_img_back = get_option(option: self::$imgBackName, default_value: null);
 
 ?>
 
@@ -34,18 +34,20 @@ $upload_img_back = get_option(option: self::$imgBackName);
                             <h2><?php _e('Logo', $domain) ?></h2>
                         </div>
                         <div>
-                            <input class="regular-text code mg-b20" type="url" id="upload-img-logo"
-                                name="upload-img-logo">
+                            <input class="regular-text mg-b20" type="url" id="upload-img-logo" name="upload-img-logo"
+                                value="<?php echo esc_url($upload_img_logo); ?>">
                             <button class="upload-img-logo button mg-b20" type="button">
                                 <?php _e('Upload logo', $domain) ?>
                             </button>
                             <p class="description mg-b20">
-                                <?php _e('Logo que se muestra en el formulario de login y/o registro', $domain); ?>
+                                <?php _e('Logo displayed on the login and/or registration form', $domain); ?>
                             </p>
                             <div id="upload-img-logo-container">
                                 <?php if (isset($upload_img_logo)) { ?>
-                                    <img src="<?php echo esc_url($upload_img_logo); ?>"
-                                        style="max-width: 250px; height: auto;" alt="">
+                                    <button name="delete-upload-img-logo-button" class="delete-img-logo button mg-b20">
+                                        <?php _e('Delete image', $domain) ?>
+                                    </button>
+                                    <img src="<?php echo esc_url($upload_img_logo); ?>" class="login-awp-img" alt="">
                                 <?php } ?>
                             </div>
                         </div>
@@ -53,23 +55,25 @@ $upload_img_back = get_option(option: self::$imgBackName);
                     <div class="flex-item">
                         <div class="row">
                             <h2>
-                                <?php _e('Imagen de fondo', $domain) ?>
+                                <?php _e('Background image', $domain) ?>
                             </h2>
                         </div>
                         <div>
-                            <input class="regular-text code mg-b20" type="url" id="upload-img-back"
-                                name="upload-img-back">
+                            <input class="regular-text mg-b20" type="url" id="upload-img-back" name="upload-img-back"
+                                value="<?php echo esc_url($upload_img_back); ?>">
                             <button class="upload-img-back button mg-b20" type="button">
                                 <?php _e('Upload image', $domain) ?>
                             </button>
                         </div>
                         <p class="description mg-b20">
-                            <?php _e('Imagen para el slider de fondo en el área de login', $domain); ?>
+                            <?php _e('Image of background slider in login area', $domain); ?>
                         </p>
                         <div id="upload-img-back-container">
                             <?php if (isset($upload_img_back)) { ?>
-                                <img src="<?php echo esc_url($upload_img_back); ?>" style="max-width: 250px; height: auto;"
-                                    alt="">
+                                <button name="delete-upload-img-back-button" class="delete-img-logo button mg-b20">
+                                    <?php _e('Delete image', $domain) ?>
+                                </button>
+                                <img src="<?php echo esc_url($upload_img_back); ?>" class="login-awp-img" alt="">
                             <?php } ?>
                         </div>
                     </div>
