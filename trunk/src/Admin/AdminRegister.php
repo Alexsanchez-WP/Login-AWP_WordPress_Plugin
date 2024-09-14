@@ -23,7 +23,6 @@ class AdminRegister
     private string $adminTemplate = 'templates/menu_admin.phtml';
     private string $messageTemplate = 'templates/status_message.phtml';
 
-
     public function load(): void
     {
         add_action(
@@ -66,10 +65,10 @@ class AdminRegister
 
     public function loginAwpSubMenuTemplate(): void
     {
-
         if (\file_exists(filename: plugin_dir_path(file: __FILE__) . $this->adminTemplate)) {
             wp_create_nonce(action: 'login_awp_form_nonce');
             require_once plugin_dir_path(file: __FILE__) . $this->adminTemplate;
+
         }
     }
 
@@ -189,6 +188,7 @@ class AdminRegister
         $status = "&{$message}=error";
         $data = sanitize_text_field(str: $upload_data);
         if (update_option(option: $db_file, value: $data)) {
+
             $status = "&{$message}=success";
         }
         return $status;

@@ -56,7 +56,6 @@ Try reducing the image size or restoring the plugin to its initial version.
     - The admin area is added to the appearance menu.
     - You can update the login logo and background.
 
-
 = 2.1.0 =
 * Features: 
     - Messages about the status of image updates are added.
