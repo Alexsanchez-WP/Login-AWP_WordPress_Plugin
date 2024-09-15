@@ -8,7 +8,6 @@
  * @autor AWP-Software
  * @since 2.0.0
  * @version 2.0.0
- * @param string $domain
  * @param string $upload_img_logo
  * @param string $upload_img_back
  */
@@ -17,9 +16,8 @@ if (!defined('ABSPATH')) {
     die('You are not allowed to call this page directly.');
 }
 
-$domain = LOGIN_AWP_DOMAIN;
-$upload_img_logo = get_option(option: self::$imgLogoName, default_value: null);
-$upload_img_back = get_option(option: self::$imgBackName, default_value: null);
+$upload_img_logo = get_option(self::$imgLogoName);
+$upload_img_back = get_option(self::$imgBackName);
 
 ?>
 
@@ -31,21 +29,21 @@ $upload_img_back = get_option(option: self::$imgBackName, default_value: null);
                 <div class="flex-container">
                     <div class="flex-item">
                         <div class="row">
-                            <h2><?php _e('Logo', $domain) ?></h2>
+                            <h2><?php _e('Logo', 'login-awp') ?></h2>
                         </div>
                         <div>
                             <input class="regular-text mg-b20" type="url" id="upload-img-logo" name="upload-img-logo"
                                 value="<?php echo esc_url($upload_img_logo); ?>">
                             <button class="upload-img-logo button mg-b20" type="button">
-                                <?php _e('Upload logo', $domain) ?>
+                                <?php _e('Upload logo', 'login-awp') ?>
                             </button>
                             <p class="description mg-b20">
-                                <?php _e('Logo displayed on the login and/or registration form', $domain); ?>
+                                <?php _e('Logo displayed on the login and/or registration form', 'login-awp'); ?>
                             </p>
                             <div id="upload-img-logo-container">
-                                <?php if (isset($upload_img_logo)) { ?>
+                                <?php if (isset($upload_img_logo) && !empty($upload_img_logo)) { ?>
                                     <button name="delete-upload-img-logo-button" class="delete-img-logo button mg-b20">
-                                        <?php _e('Delete image', $domain) ?>
+                                        <?php _e('Delete image', 'login-awp') ?>
                                     </button>
                                     <img src="<?php echo esc_url($upload_img_logo); ?>" class="login-awp-img" alt="">
                                 <?php } ?>
@@ -55,23 +53,23 @@ $upload_img_back = get_option(option: self::$imgBackName, default_value: null);
                     <div class="flex-item">
                         <div class="row">
                             <h2>
-                                <?php _e('Background image', $domain) ?>
+                                <?php _e('Background image', 'login-awp') ?>
                             </h2>
                         </div>
                         <div>
                             <input class="regular-text mg-b20" type="url" id="upload-img-back" name="upload-img-back"
                                 value="<?php echo esc_url($upload_img_back); ?>">
                             <button class="upload-img-back button mg-b20" type="button">
-                                <?php _e('Upload image', $domain) ?>
+                                <?php _e('Upload image', 'login-awp') ?>
                             </button>
                         </div>
                         <p class="description mg-b20">
-                            <?php _e('Image of background slider in login area', $domain); ?>
+                            <?php _e('Image of background slider in login area', 'login-awp'); ?>
                         </p>
                         <div id="upload-img-back-container">
-                            <?php if (isset($upload_img_back)) { ?>
+                            <?php if (isset($upload_img_back) && !empty($upload_img_back)) { ?>
                                 <button name="delete-upload-img-back-button" class="delete-img-logo button mg-b20">
-                                    <?php _e('Delete image', $domain) ?>
+                                    <?php _e('Delete image', 'login-awp') ?>
                                 </button>
                                 <img src="<?php echo esc_url($upload_img_back); ?>" class="login-awp-img" alt="">
                             <?php } ?>
@@ -87,8 +85,8 @@ $upload_img_back = get_option(option: self::$imgBackName, default_value: null);
                     <input type="hidden" name="action" value="login_awp_form_action">
 
                     <button name="submit_button_login_awp" type="submit" class="button button-primary"
-                        title="<?php _e('Save images', $domain) ?>">
-                        <?php _e('Save changes', $domain) ?>
+                        title="<?php _e('Save images', 'login-awp') ?>">
+                        <?php _e('Save images', 'login-awp') ?>
                     </button>
                 </div>
             </form>
