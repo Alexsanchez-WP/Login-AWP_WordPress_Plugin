@@ -11,7 +11,6 @@ wp config create --dbname="${MYSQL_DATABASE:-wordpress}" \
                 --dbuser="${MYSQL_USER:-root}" \
                 --dbpass="${MYSQL_PASSWORD:-root}" \
                 --dbhost="${DB_HOST:-db}" \
-                --debug \
                 --path=/usr/src/wordpress \
                 --allow-root \
                 --force

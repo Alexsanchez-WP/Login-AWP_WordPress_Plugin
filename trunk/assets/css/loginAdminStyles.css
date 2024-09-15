@@ -1,0 +1,29 @@
+.flex-container {
+  display: flex;
+  justify-content: flex-start;
+  flex-grow: initial;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.flex-item {
+  flex: 1;
+  min-width: 300px;
+  margin: 0 10px;
+}
+
+.login-awp-img {
+  max-width: 250px;
+  height: auto;
+}
+
+.mg-b20 {
+  margin-bottom: 20px !important;
+}
+
+@media (max-width: 768px) {
+  .flex-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

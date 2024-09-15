@@ -1,0 +1,109 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Login AWP\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-15 00:20+0000\n"
+"PO-Revision-Date: 2024-09-15 00:42+0000\n"
+"Last-Translator: \n"
+"Language-Team: Español\n"
+"Language: es_ES\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.6.11; wp-6.6.2\n"
+"X-Domain: login-awp"
+
+#. Author of the plugin
+msgid "AWP-Software"
+msgstr "AWP-Software"
+
+#: src/Admin/AdminRegister.php:212
+msgid "background"
+msgstr "fondo"
+
+#: src/Admin/templates/menu_admin.php:56
+msgid "Background image"
+msgstr "Imagen de fondo"
+
+#: src/Admin/AdminRegister.php:103 src/Admin/templates/menu_admin.php:46
+#: src/Admin/templates/menu_admin.php:72
+msgid "Delete image"
+msgstr "Eliminar imagen"
+
+#. Author URI of the plugin
+msgid "https://github.com/AWP-Software"
+msgstr "https://github.com/AWP-Software"
+
+#. URI of the plugin
+msgid "https://wordpress.org/plugins/login-awp"
+msgstr "https://wordpress.org/plugins/login-awp"
+
+#: src/Admin/templates/menu_admin.php:67
+msgid "Image of background slider in login area"
+msgstr "Imagen que se desliza en el fondo del área de ingreso"
+
+#: src/Admin/AdminRegister.php:62
+msgid "Login"
+msgstr "Login"
+
+#. Name of the plugin
+msgid "Login AWP"
+msgstr "Login AWP"
+
+#: src/Admin/AdminRegister.php:58
+msgid "Login AWP Plugin"
+msgstr "Complemento Login AWP"
+
+#: src/Admin/templates/menu_admin.php:32
+msgid "Logo"
+msgstr "Logo"
+
+#: src/Admin/AdminRegister.php:205
+msgid "logo"
+msgstr "logotipo"
+
+#: src/Admin/templates/menu_admin.php:41
+msgid "Logo displayed on the login and/or registration form"
+msgstr "Logo que se visualiza en el formulario de ingreso y/o registro "
+
+#: src/Admin/AdminRegister.php:242
+msgid "No actions were taken"
+msgstr "no se realizaron acciones"
+
+#: src/Admin/templates/menu_admin.php:88 src/Admin/templates/menu_admin.php:89
+msgid "Save images"
+msgstr "Guardar imágenes"
+
+#: src/Admin/AdminRegister.php:102
+msgid "Select the image"
+msgstr "Seleccionar imagen"
+
+#: src/Admin/AdminRegister.php:223
+#, php-format
+msgid "The login area %s has been successfully changed."
+msgstr "El %s del área de inicio de sesión se ha cambiado correctamente."
+
+#: src/Admin/AdminRegister.php:233
+#, php-format
+msgid "The login area %s has not been changed."
+msgstr "El %s del área de inicio de sesión no ha sido modificada."
+
+#. Description of the plugin
+msgid "This plugin modifies the login area for WordPress admin"
+msgstr ""
+"Este complemento modifica la apariencia del área de ingreso al administrador "
+"de WordPress"
+
+#: src/Admin/templates/menu_admin.php:63
+msgid "Upload image"
+msgstr "Subir imagen"
+
+#: src/Admin/templates/menu_admin.php:38
+msgid "Upload logo"
+msgstr "Subir logo"
+
+#: src/Admin/AdminRegister.php:119
+msgid "Verification failed"
+msgstr "la verificación fallo"
