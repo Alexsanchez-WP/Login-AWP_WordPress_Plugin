@@ -59,3 +59,4 @@ Try reducing the image size or restoring the plugin to its initial version.
 = 2.1.0 =
 * Features: 
     - Messages about the status of image updates are added.
+    - Spanish translation added.
