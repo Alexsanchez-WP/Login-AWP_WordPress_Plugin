@@ -1,0 +1,108 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Login AWP\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-15 00:41+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.6.11; wp-6.6.2\n"
+"X-Domain: login-awp"
+
+#. Author of the plugin
+msgid "AWP-Software"
+msgstr ""
+
+#: src/Admin/AdminRegister.php:212
+msgid "background"
+msgstr ""
+
+#: src/Admin/templates/menu_admin.php:56
+msgid "Background image"
+msgstr ""
+
+#: src/Admin/AdminRegister.php:103 src/Admin/templates/menu_admin.php:46
+#: src/Admin/templates/menu_admin.php:72
+msgid "Delete image"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://github.com/AWP-Software"
+msgstr ""
+
+#. URI of the plugin
+msgid "https://wordpress.org/plugins/login-awp"
+msgstr ""
+
+#: src/Admin/templates/menu_admin.php:67
+msgid "Image of background slider in login area"
+msgstr ""
+
+#: src/Admin/AdminRegister.php:62
+msgid "Login"
+msgstr ""
+
+#. Name of the plugin
+msgid "Login AWP"
+msgstr ""
+
+#: src/Admin/AdminRegister.php:58
+msgid "Login AWP Plugin"
+msgstr ""
+
+#: src/Admin/templates/menu_admin.php:32
+msgid "Logo"
+msgstr ""
+
+#: src/Admin/AdminRegister.php:205
+msgid "logo"
+msgstr ""
+
+#: src/Admin/templates/menu_admin.php:41
+msgid "Logo displayed on the login and/or registration form"
+msgstr ""
+
+#: src/Admin/AdminRegister.php:242
+msgid "No actions were taken"
+msgstr ""
+
+#: src/Admin/templates/menu_admin.php:88 src/Admin/templates/menu_admin.php:89
+msgid "Save images"
+msgstr ""
+
+#: src/Admin/AdminRegister.php:102
+msgid "Select the image"
+msgstr ""
+
+#: src/Admin/AdminRegister.php:223
+#, php-format
+msgid "The login area %s has been successfully changed."
+msgstr ""
+
+#: src/Admin/AdminRegister.php:233
+#, php-format
+msgid "The login area %s has not been changed."
+msgstr ""
+
+#. Description of the plugin
+msgid "This plugin modifies the login area for WordPress admin"
+msgstr ""
+
+#: src/Admin/templates/menu_admin.php:63
+msgid "Upload image"
+msgstr ""
+
+#: src/Admin/templates/menu_admin.php:38
+msgid "Upload logo"
+msgstr ""
+
+#: src/Admin/AdminRegister.php:119
+msgid "Verification failed"
+msgstr ""

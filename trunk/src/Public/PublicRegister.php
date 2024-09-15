@@ -7,7 +7,6 @@ declare(strict_types=1);
  *
  * @author AWP-Software
  * @since 2.0.0
- * @global LOGIN_AWP_DIR_URL
  */
 
 namespace Login\Awp\Public;
@@ -16,7 +15,11 @@ use Login\Awp\Admin\AdminRegister;
 
 class PublicRegister
 {
-    public string $publicPath = LOGIN_AWP_DIR_URL;
+    public string $dirUrl;
+    public function __construct($dir_url)
+    {
+        $this->dirUrl = $dir_url . 'assets/';
+    }
     public function load(): void
     {
         add_action(
@@ -40,13 +43,13 @@ class PublicRegister
     {
         wp_enqueue_style(
             handle: 'vegasCSS',
-            src: $this->publicPath . 'assets/css/vegas.min.css',
+            src: $this->dirUrl . 'css/vegas.min.css',
             deps: array(),
             ver: false
         );
         wp_enqueue_style(
             handle: 'loginCSS',
-            src: $this->publicPath . 'assets/css/loginStyles.css',
+            src: $this->dirUrl . 'css/loginStyles.css',
             deps: array(),
             ver: false
         );
@@ -57,14 +60,14 @@ class PublicRegister
         wp_enqueue_script(handle: 'jquery');
         wp_enqueue_script(
             handle: 'vegasJS',
-            src: $this->publicPath . 'assets/js/vegas.min.js',
+            src: $this->dirUrl . 'js/vegas.min.js',
             deps: array('jquery'),
             ver: '2.5.4',
             args: true
         );
         wp_enqueue_script(
             handle: 'loginJS',
-            src: $this->publicPath . 'assets/js/loginJS.js',
+            src: $this->dirUrl . 'js/loginJS.js',
             deps: array('jquery'),
             ver: '1.0.0',
             args: true
@@ -81,7 +84,7 @@ class PublicRegister
         $upload_img_back = get_option(option: AdminRegister::$imgBackName);
         $upload_img_back = isset($upload_img_back) && !empty($upload_img_back) ?
             $upload_img_back :
-            $this->publicPath . 'assets/img/slider.jpg';
+            $this->dirUrl . 'img/slider.jpg';
 
         wp_localize_script(
             handle: 'loginJS',
@@ -89,7 +92,7 @@ class PublicRegister
             l10n: array(
                 'logo' => esc_url(url: $upload_img_logo),
                 'sliders' => esc_url(url: $upload_img_back),
-                'overlay' => esc_url(url: $this->publicPath . 'assets/img/overlay.png')
+                'overlay' => esc_url(url: $this->dirUrl . 'img/overlay.png')
             )
         );
     }

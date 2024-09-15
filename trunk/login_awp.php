@@ -11,7 +11,7 @@ declare(strict_types=1);
  * Requires PHP: 7.4
  * Author: AWP-Software
  * Author URI: https://github.com/AWP-Software
- * Text Domain: login_awp
+ * Text Domain: login-awp
  * Domain Path: /languages
  * License: GPLv2
  * Released under the GNU General Public License (GPL)
@@ -23,12 +23,13 @@ if (!defined(constant_name: 'ABSPATH')) {
     die('You are not allowed to call this page directly.');
 }
 
-define('LOGIN_AWP_DIR_URL', plugin_dir_url(__FILE__));
-define('LOGIN_AWP_DIR_PATH', plugin_dir_path(__FILE__));
-define('LOGIN_AWP_DOMAIN', 'login_awp');
-
 require_once __DIR__ . '/vendor/autoload.php';
 
 use Login\Awp\Register;
 
-Register::load();
+$register = new Register(
+    plugin_dir_url(__FILE__),
+    plugin_dir_path(__FILE__),
+    dirname(plugin_basename(__FILE__)) . '/languages'
+);
+$register->load();

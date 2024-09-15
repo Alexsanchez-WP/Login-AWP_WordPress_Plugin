@@ -7,44 +7,47 @@ declare(strict_types=1);
  *
  * @author AWP-Software
  * @since 2.0.0
- * @global LOGIN_AWP_DIR_URL
- * @global LOGIN_AWP_DOMAIN
+ * @version 2.1.0
  */
 
 namespace Login\Awp\Admin;
 
 class AdminRegister
 {
-    public string $domain = LOGIN_AWP_DOMAIN;
-    public string $publicPath = LOGIN_AWP_DIR_URL;
+    public string $dirUrl;
 
     public static string $imgLogoName = 'login_awp_logo_url';
     public static string $imgBackName = 'login_awp_background_url';
-    private string $adminTemplate = 'templates/menu_admin.phtml';
-    private string $messageTemplate = 'templates/status_message.phtml';
+    private string $adminTemplate = 'templates/menu_admin.php';
+    private string $messageTemplate = 'templates/status_message.php';
+
+    public function __construct($dir_url)
+    {
+        $this->dirUrl = $dir_url . 'assets/';
+    }
 
     public function load(): void
     {
         add_action(
-            hook_name: 'admin_menu',
-            callback: array($this, 'registerSubMenu')
+            'admin_menu',
+            array($this, 'registerSubMenu')
         );
         add_action(
-            hook_name: 'admin_enqueue_scripts',
-            callback: array($this, 'adminScripts')
+            'admin_enqueue_scripts',
+            array($this, 'adminScripts')
         );
         add_action(
-            hook_name: 'admin_enqueue_scripts',
-            callback: array($this, 'adminStyles')
+            'admin_enqueue_scripts',
+            array($this, 'adminStyles')
         );
         add_action(
-            hook_name: 'admin_post_login_awp_form_action',
-            callback: array($this, 'loginAwpAdminform')
+            'admin_post_login_awp_form_action',
+            array($this, 'loginAwpAdminform')
         );
 
         add_action(
-            hook_name: 'admin_notices',
-            callback: array($this, 'statusMessage')
+            'admin_notices',
+            array($this, 'statusMessage')
         );
     }
 
@@ -52,11 +55,8 @@ class AdminRegister
     {
         add_submenu_page(
             parent_slug: 'themes.php',
-            page_title: __(
-                text: 'Login AWP Plugin',
-                domain: $this->domain
-            ),
-            menu_title: __(text: 'Login', domain: $this->domain),
+            page_title: __('Login AWP Plugin', 'login-awp'),
+            menu_title: __('Login', 'login-awp'),
             capability: 'manage_options',
             menu_slug: 'login-awp',
             callback: array($this, 'loginAwpSubMenuTemplate')
@@ -65,10 +65,9 @@ class AdminRegister
 
     public function loginAwpSubMenuTemplate(): void
     {
-        if (\file_exists(filename: plugin_dir_path(file: __FILE__) . $this->adminTemplate)) {
-            wp_create_nonce(action: 'login_awp_form_nonce');
-            require_once plugin_dir_path(file: __FILE__) . $this->adminTemplate;
-
+        if (\file_exists(plugin_dir_path(__FILE__) . $this->adminTemplate)) {
+            wp_create_nonce('login_awp_form_nonce');
+            include_once plugin_dir_path(__FILE__) . $this->adminTemplate;
         }
     }
 
@@ -76,7 +75,7 @@ class AdminRegister
     {
         wp_enqueue_style(
             handle: 'loginAdminCSS',
-            src: $this->publicPath . 'assets/css/loginAdminStyles.css',
+            src: $this->dirUrl . 'css/loginAdminStyles.css',
             deps: array(),
             ver: false
         );
@@ -84,10 +83,10 @@ class AdminRegister
     public function adminScripts(): void
     {
         wp_enqueue_media();
-        wp_enqueue_script(handle: 'jquery');
+        wp_enqueue_script('jquery');
         wp_enqueue_script(
             handle: 'loginAdminScript',
-            src: $this->publicPath . 'assets/js/loginAdmin.js',
+            src: $this->dirUrl . 'js/loginAdmin.js',
             deps: array('jquery'),
             ver: '1.0.0',
             args: true
@@ -96,8 +95,8 @@ class AdminRegister
             handle: 'loginAdminScript',
             object_name: 'login_text',
             l10n: array(
-                'text' => __(text: 'Select the image', domain: $this->domain),
-                'delete_button' => __(text: 'Delete image', domain: $this->domain)
+                'text' => __('Select the image', 'login-awp'),
+                'delete_button' => __('Delete image', 'login-awp')
             )
         );
     }
@@ -113,7 +112,7 @@ class AdminRegister
                 action: 'login_awp_form_nonce'
             )
         ) {
-            wp_die(message: __(text: 'Verification failed', domain: $this->domain));
+            wp_die(__('Verification failed', 'login-awp'));
         }
 
         $message = "";
@@ -125,7 +124,7 @@ class AdminRegister
 
             if (
                 isset($upload_img_logo) &&
-                filter_var(value: $upload_img_logo, filter: \FILTER_VALIDATE_URL)
+                filter_var($upload_img_logo, \FILTER_VALIDATE_URL)
             ) {
 
                 $message .= $this->updateOption(
@@ -137,7 +136,7 @@ class AdminRegister
 
             if (
                 isset($upload_img_back) &&
-                filter_var(value: $upload_img_back, filter: \FILTER_VALIDATE_URL)
+                filter_var($upload_img_back, \FILTER_VALIDATE_URL)
             ) {
                 $message .= $this->updateOption(
                     upload_data: $upload_img_back,
@@ -149,7 +148,7 @@ class AdminRegister
 
         if (
             isset($_POST["delete-upload-img-logo-button"]) &&
-            !is_null(value: $_POST["delete-upload-img-logo-button"])
+            !is_null($_POST["delete-upload-img-logo-button"])
         ) {
             $message .= $this->updateOption(
                 upload_data: "",
@@ -161,7 +160,7 @@ class AdminRegister
 
         if (
             isset($_POST["delete-upload-img-back-button"]) &&
-            !is_null(value: $_POST["delete-upload-img-back-button"])
+            !is_null($_POST["delete-upload-img-back-button"])
         ) {
             $message .= $this->updateOption(
                 upload_data: "",
@@ -170,8 +169,8 @@ class AdminRegister
             );
         }
 
-        $url = parse_url(url: $_POST["_wp_http_referer"])["path"] . "?page=login-awp";
-        wp_redirect(location: sanitize_url(url: $url . $message));
+        $url = parse_url($_POST["_wp_http_referer"])["path"] . "?page=login-awp";
+        wp_redirect(sanitize_url($url . $message));
         exit;
     }
 
@@ -186,8 +185,8 @@ class AdminRegister
     private function updateOption($upload_data, $message, $db_file): string
     {
         $status = "&{$message}=error";
-        $data = sanitize_text_field(str: $upload_data);
-        if (update_option(option: $db_file, value: $data)) {
+        $data = sanitize_text_field($upload_data);
+        if (update_option($db_file, $data)) {
 
             $status = "&{$message}=success";
         }
@@ -198,15 +197,15 @@ class AdminRegister
     {
         if (isset($_GET['logo_status'])) {
             $this->messageTemplate(
-                status: sanitize_text_field($_GET['logo_status']),
-                message: 'logo'
+                sanitize_text_field($_GET['logo_status']),
+                __('logo', 'login-awp')
             );
         }
 
         if (isset($_GET['background_status'])) {
             $this->messageTemplate(
-                status: sanitize_text_field($_GET['background_status']),
-                message: 'background'
+                sanitize_text_field($_GET['background_status']),
+                __('background', 'login-awp')
             );
         }
     }
@@ -216,20 +215,32 @@ class AdminRegister
         switch ($status) {
             case 'success':
                 $class = 'notice notice-success is-dismissible';
-                $text = __(text: "The login area {$message} has been successfully changed.", domain: $this->domain);
+                $text = sprintf(
+                    __(
+                        "The login area %s has been successfully changed.",
+                        'login-awp'
+                    ),
+                    $message
+                );
                 break;
             case 'error':
                 $class = 'notice notice-error is-dismissible';
-                $text = __(text: "The login area {$message} has not been changed.", domain: $this->domain);
+                $text = sprintf(
+                    __(
+                        "The login area %s has not been changed.",
+                        'login-awp'
+                    ),
+                    $message
+                );
                 break;
             default:
                 $class = 'notice notice-info is-dismissible';
-                $text = __(text: "No actions were taken", domain: $this->domain);
+                $text = __("No actions were taken", 'login-awp');
                 break;
         }
 
-        if (\file_exists(filename: plugin_dir_path(file: __FILE__) . $this->messageTemplate)) {
-            require_once plugin_dir_path(file: __FILE__) . $this->messageTemplate;
+        if (\file_exists(plugin_dir_path(__FILE__) . $this->messageTemplate)) {
+            include_once plugin_dir_path(__FILE__) . $this->messageTemplate;
         }
     }
 }

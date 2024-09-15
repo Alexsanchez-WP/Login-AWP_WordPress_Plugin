@@ -12,13 +12,12 @@
  * @param string $text
  */
 
-if (!defined(constant_name: 'ABSPATH')) {
+if (!defined('ABSPATH')) {
     die('You are not allowed to call this page directly.');
 }
 
 ?>
 
-
-<div class="<?php echo esc_attr(text: $class); ?>">
-    <p><?php echo esc_html(text: $text); ?></p>
+<div class="<?php echo esc_attr($class); ?>">
+    <p><?php echo esc_html($text); ?></p>
 </div>
