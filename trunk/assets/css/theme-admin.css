@@ -1,0 +1,208 @@
+/**
+ * Styles for the theme selector interface
+ */
+
+.login-awp-theme-selector {
+    margin: 20px 0;
+}
+
+.login-awp-themes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 20px;
+}
+
+.login-awp-theme-card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    transition: all 0.2s ease;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.login-awp-theme-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.login-awp-theme-card.selected {
+    border: 2px solid #2271b1;
+    box-shadow: 0 0 0 1px #2271b1;
+}
+
+.login-awp-theme-preview {
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+}
+
+.login-awp-theme-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.login-awp-theme-card:hover .login-awp-theme-preview img {
+    transform: scale(1.05);
+}
+
+.login-awp-theme-info {
+    padding: 15px;
+}
+
+.login-awp-theme-info h3 {
+    margin: 0 0 5px 0;
+    font-size: 16px;
+}
+
+.login-awp-theme-info p {
+    margin: 0;
+    color: #666;
+    font-size: 13px;
+}
+
+.login-awp-theme-actions {
+    padding: 0 15px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.theme-active {
+    color: #2271b1;
+    font-weight: 500;
+    font-size: 13px;
+}
+
+/* Modal styles */
+.login-awp-theme-preview-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-awp-preview-container {
+    width: 90%;
+    max-width: 1200px;
+    max-height: 90vh;
+    background-color: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.login-awp-preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.login-awp-preview-header h2 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.close-preview {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+    line-height: 1;
+}
+
+.login-awp-preview-content {
+    flex: 1;
+    min-height: 500px;
+    overflow: auto;
+}
+
+#theme-preview-frame {
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+    border: none;
+}
+
+.login-awp-preview-footer {
+    padding: 15px 20px;
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* Estilos para el modal de confirmación de reset */
+.login-awp-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 99999; /* Asegurar que esté por encima de otros elementos */
+    display: none; /* Se establecerá a 'flex' con JS */
+    align-items: center;
+    justify-content: center;
+}
+
+.login-awp-modal-container {
+    width: 90%;
+    max-width: 500px;
+    background-color: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+}
+
+.login-awp-modal-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.login-awp-modal-header h2 {
+    margin: 0;
+    font-size: 18px;
+    color: #23282d;
+}
+
+.login-awp-modal-content {
+    padding: 20px;
+    font-size: 14px;
+    color: #444;
+}
+
+.login-awp-modal-footer {
+    padding: 15px 20px;
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 782px) {
+    .login-awp-themes-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+    
+    .login-awp-theme-preview {
+        height: 150px;
+    }
+    
+    .login-awp-preview-container {
+        width: 95%;
+    }
+}

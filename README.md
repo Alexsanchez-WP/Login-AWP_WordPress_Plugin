@@ -22,6 +22,27 @@ This plugin improves the login look for the website and defaults to the page log
 * Put the main logo of the website
 * Responsive
 * Just activating it already adds personality to the login
+* Choose from pre-designed themes to instantly transform your login page
+* Create your own custom theme with the Style Builder
+
+## Features
+
+### Basic Customization
+* Custom logo upload
+* Background image with transitions
+* Responsive design for all devices
+
+### Theme System
+* Multiple pre-designed themes to choose from
+* One-click theme application
+* Preview themes before applying
+
+### Style Builder
+* Advanced customization tool for complete control
+* Customize colors for all login page elements
+* Adjust typography settings
+* Fine-tune borders, margins, and padding
+* Live preview of changes
 
 ## Frequently Asked Questions
 

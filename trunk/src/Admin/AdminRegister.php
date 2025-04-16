@@ -7,7 +7,7 @@ declare(strict_types=1);
  *
  * @author AWP-Software
  * @since 2.0.0
- * @version 2.1.0
+ * @version 3.0.0
  */
 
 namespace Login\Awp\Admin;
@@ -20,10 +20,14 @@ class AdminRegister
     public static string $imgBackName = 'login_awp_background_url';
     private string $adminTemplate = 'templates/menu_admin.php';
     private string $messageTemplate = 'templates/status_message.php';
+    private ThemeManager $themeManager;
+    private StyleBuilder $styleBuilder;
 
     public function __construct($dir_url)
     {
         $this->dirUrl = $dir_url . 'assets/';
+        $this->themeManager = new ThemeManager($dir_url);
+        $this->styleBuilder = new StyleBuilder($dir_url);
     }
 
     public function load(): void
@@ -49,6 +53,10 @@ class AdminRegister
             'admin_notices',
             array($this, 'statusMessage')
         );
+        
+        // Load theme manager and style builder components
+        $this->themeManager->load();
+        $this->styleBuilder->load();
     }
 
     public function registerSubMenu(): void
@@ -67,6 +75,10 @@ class AdminRegister
     {
         if (\file_exists(plugin_dir_path(__FILE__) . $this->adminTemplate)) {
             wp_create_nonce('login_awp_form_nonce');
+            
+            // Current active tab
+            $active_tab = isset($_GET['tab']) ? sanitize_text_field($_GET['tab']) : 'general';
+            
             include_once plugin_dir_path(__FILE__) . $this->adminTemplate;
         }
     }
@@ -77,9 +89,10 @@ class AdminRegister
             handle: 'loginAdminCSS',
             src: $this->dirUrl . 'css/loginAdminStyles.css',
             deps: array(),
-            ver: false
+            ver: '3.0.0'
         );
     }
+    
     public function adminScripts(): void
     {
         wp_enqueue_media();
@@ -88,7 +101,7 @@ class AdminRegister
             handle: 'loginAdminScript',
             src: $this->dirUrl . 'js/loginAdmin.js',
             deps: array('jquery'),
-            ver: '1.0.0',
+            ver: '3.0.0',
             args: true
         );
         wp_localize_script(

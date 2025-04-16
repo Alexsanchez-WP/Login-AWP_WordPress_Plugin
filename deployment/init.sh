@@ -1,5 +1,6 @@
 #!/bin/bash
 # Hacer ping a la bd
+set -e
 export HTTP_HOST="${WP_URL:-localhost}"
 
 while ! mysqladmin ping -h"$DB_HOST" --silent; do

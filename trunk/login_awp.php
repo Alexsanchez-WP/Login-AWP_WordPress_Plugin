@@ -6,7 +6,7 @@ declare(strict_types=1);
  * Plugin Name: Login AWP
  * Plugin URI: https://wordpress.org/plugins/login-awp
  * Description: This plugin modifies the login area for WordPress admin
- * Version: 2.1.0
+ * Version: 3.0.0
  * Requires at least: 5.4
  * Requires PHP: 7.4
  * Author: AWP-Software

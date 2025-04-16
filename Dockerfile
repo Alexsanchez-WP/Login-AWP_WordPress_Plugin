@@ -23,6 +23,7 @@ COPY trunk/ ./wp-content/plugins/login-awp/
 COPY deployment/init.sh /usr/local/bin/init.sh
 
 RUN chmod +x /usr/local/bin/init.sh && \
+    mkdir -p /usr/src/wordpress/wp-content/uploads && \
     chmod 777 -R /usr/src/wordpress/wp-content/uploads/
 
-ENTRYPOINT ["/usr/local/bin/init.sh"]
+# ENTRYPOINT ["/usr/local/bin/init.sh"]

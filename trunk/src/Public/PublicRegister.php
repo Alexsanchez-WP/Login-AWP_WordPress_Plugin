@@ -7,19 +7,25 @@ declare(strict_types=1);
  *
  * @author AWP-Software
  * @since 2.0.0
+ * @version 3.0.0
  */
 
 namespace Login\Awp\Public;
 
 use Login\Awp\Admin\AdminRegister;
+use Login\Awp\Admin\ThemeManager;
 
 class PublicRegister
 {
     public string $dirUrl;
+    private ThemeManager $themeManager;
+    
     public function __construct($dir_url)
     {
         $this->dirUrl = $dir_url . 'assets/';
+        $this->themeManager = new ThemeManager($dir_url);
     }
+    
     public function load(): void
     {
         add_action(
@@ -36,6 +42,12 @@ class PublicRegister
             hook_name: 'login_enqueue_scripts',
             callback: array($this, 'loginAwpLocalize'),
             priority: 1
+        );
+        
+        // Add the custom theme styles
+        add_action(
+            hook_name: 'login_head',
+            callback: array($this, 'loginAwpThemeStyles')
         );
     }
 
@@ -95,5 +107,16 @@ class PublicRegister
                 'overlay' => esc_url(url: $this->dirUrl . 'img/overlay.png')
             )
         );
+    }
+    
+    /**
+     * Output theme styles in the login page head
+     */
+    public function loginAwpThemeStyles(): void
+    {
+        $theme_css = $this->themeManager->generateThemeCSS();
+        if (!empty($theme_css)) {
+            echo '<style id="login-awp-theme-styles">' . $theme_css . '</style>';
+        }
     }
 }
