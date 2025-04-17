@@ -1,0 +1,11 @@
+svn propset svn:ignore ".dockerignore
+.env
+.git
+.gitattributes
+.gitignore
+.svnignore
+LICENSE.md
+README.md
+composer.json
+tests
+*composer.lock" .

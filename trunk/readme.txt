@@ -3,7 +3,7 @@ Contributors: alexanderwp
 Donate link: https://www.paypal.com/donate/?hosted_button_id=32A55GWU7JKY4
 Tags: login, customize, custom login
 Requires at least: 5.4
-Tested up to: 6.7
+Tested up to: 6.8
 Stable tag: 3.0.0
 Requires PHP: 7.4
 License: GPLv3 or later

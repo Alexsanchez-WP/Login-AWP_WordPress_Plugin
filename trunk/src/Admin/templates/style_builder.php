@@ -22,10 +22,10 @@ $custom_styles = $this->getCustomStyles();
             <div class="login-awp-control-panel">
                 <h3><?php _e('Color Settings', 'login-awp'); ?></h3>
                 
-                <div class="login-awp-control-group">
+                <!-- <div class="login-awp-control-group">
                     <label for="login-awp-bg-color"><?php _e('Background Color', 'login-awp'); ?></label>
                     <input type="text" id="login-awp-bg-color" class="login-awp-color-picker" data-property="background-color" data-target="body.login" value="#f0f0f1">
-                </div>
+                </div> -->
                 
                 <div class="login-awp-control-group">
                     <label for="login-awp-container-bg"><?php _e('Form Background', 'login-awp'); ?></label>

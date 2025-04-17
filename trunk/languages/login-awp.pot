@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Login AWP\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-15 00:41+0000\n"
+"POT-Creation-Date: 2025-04-17 06:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -16,21 +16,177 @@ msgstr ""
 "X-Loco-Version: 2.6.11; wp-6.6.2\n"
 "X-Domain: login-awp"
 
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/theme_selector.php:42
+msgctxt "Activar Tema"
+msgid "Active Theme"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/theme_selector.php:39
+msgctxt "Aplicar Thema"
+msgid "Apply Theme"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/theme_selector.php:60
+msgctxt "Aplicar Este Tema"
+msgid "Apply This Theme"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/StyleBuilder.php:57
+msgid ""
+"Are you sure you want to reset all custom styles? This cannot be undone."
+msgstr ""
+
 #. Author of the plugin
+msgctxt "AWP-Sofware"
 msgid "AWP-Software"
 msgstr ""
 
-#: src/Admin/AdminRegister.php:212
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/AdminRegister.php:221
+msgctxt "fondo"
 msgid "background"
 msgstr ""
 
-#: src/Admin/templates/menu_admin.php:56
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/style_builder.php:26
+msgctxt "Color de Fondo"
+msgid "Background Color"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/menu_admin.php:71
+msgctxt "Imagen de fondo"
 msgid "Background image"
 msgstr ""
 
-#: src/Admin/AdminRegister.php:103 src/Admin/templates/menu_admin.php:46
-#: src/Admin/templates/menu_admin.php:72
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/style_builder.php:101
+msgctxt "Radio del Borde"
+msgid "Border Radius"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/style_builder.php:109
+msgid "Box Shadow"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/style_builder.php:41
+msgctxt "Color del Botón"
+msgid "Button Color"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/style_builder.php:46
+msgid "Button Hover Color"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/style_builder.php:136
+msgctxt "Estilo del Botón"
+msgid "Button Style"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/theme_selector.php:76
+msgctxt "Cancelar"
+msgid "Cancel"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/ThemeManager.php:108
+msgid "Clean and minimalist design"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/theme_selector.php:59
+msgctxt "Cerrar"
+msgid "Close"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/style_builder.php:23
+msgctxt "Configuraciones de color"
+msgid "Color Settings"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/ThemeManager.php:128
+msgid "Colorful"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/ThemeManager.php:86
+msgid "Corporate"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/StyleBuilder.php:55
+msgid "Custom styles have been reset"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/StyleBuilder.php:53
+msgid "Custom styles saved successfully"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/ThemeManager.php:149
+msgctxt "modo Oscuro"
+msgid "Dark Mode"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/ThemeManager.php:150
+msgid "Dark theme for low-light environments"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/ThemeManager.php:65
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/style_builder.php:138
+msgctxt "Por Defecto"
+msgid "Default"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/AdminRegister.php:112
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/menu_admin.php:61
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/menu_admin.php:87
+msgctxt "Eliminar imagen"
 msgid "Delete image"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/theme_selector.php:73
+msgid "Do you want to reset your Style Builder changes and apply this theme?"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/StyleBuilder.php:56
+msgid "Error resetting custom styles"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/StyleBuilder.php:54
+msgid "Error saving custom styles"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/style_builder.php:60
+msgctxt "Familia de la fuente"
+msgid "Font Family"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/style_builder.php:81
+msgctxt "Tamaño de la fuente"
+msgid "Font Size"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/style_builder.php:31
+msgid "Form Background"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/style_builder.php:120
+msgid "Form Padding"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/style_builder.php:128
+msgid "Form Width"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/menu_admin.php:29
+msgctxt "Configuraciones Generales"
+msgid "General Settings"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/style_builder.php:165
+msgid "Generated CSS"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/StyleBuilder.php:177
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/style_builder.php:70
+msgctxt "Fuentes de Google"
+msgid "Google Fonts"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/style_builder.php:114
+msgid "Heavy"
 msgstr ""
 
 #. Author URI of the plugin
@@ -41,11 +197,53 @@ msgstr ""
 msgid "https://wordpress.org/plugins/login-awp"
 msgstr ""
 
-#: src/Admin/templates/menu_admin.php:67
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/menu_admin.php:82
 msgid "Image of background slider in login area"
 msgstr ""
 
-#: src/Admin/AdminRegister.php:62
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/StyleBuilder.php:60
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/ThemeManager.php:296
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/ThemeManager.php:329
+msgid "Invalid security token"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/ThemeManager.php:344
+msgid "Invalid theme selected"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/style_builder.php:115
+msgid "Layered"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/style_builder.php:98
+msgid "Layout & Effects"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/style_builder.php:112
+msgid "Light"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/style_builder.php:89
+msgid "Line Height"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/style_builder.php:51
+msgid "Link Color"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/style_builder.php:148
+msgid "Live Preview"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/style_builder.php:153
+msgid "Loading preview..."
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/preview_frame.php:85
+msgid "Log In"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/AdminRegister.php:67
 msgid "Login"
 msgstr ""
 
@@ -53,56 +251,212 @@ msgstr ""
 msgid "Login AWP"
 msgstr ""
 
-#: src/Admin/AdminRegister.php:58
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/AdminRegister.php:66
 msgid "Login AWP Plugin"
 msgstr ""
 
-#: src/Admin/templates/menu_admin.php:32
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/preview_frame.php:36
+msgctxt "Vista previa del login"
+msgid "Login Preview"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/style_builder.php:150
+msgid "Login Style Preview"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/menu_admin.php:47
+msgctxt "Logotipo"
 msgid "Logo"
 msgstr ""
 
-#: src/Admin/AdminRegister.php:205
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/AdminRegister.php:214
+msgctxt "logotipo"
 msgid "logo"
 msgstr ""
 
-#: src/Admin/templates/menu_admin.php:41
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/menu_admin.php:56
 msgid "Logo displayed on the login and/or registration form"
 msgstr ""
 
-#: src/Admin/AdminRegister.php:242
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/preview_frame.php:90
+msgid "Lost your password?"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/style_builder.php:113
+msgctxt "Medio"
+msgid "Medium"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/ThemeManager.php:107
+msgctxt "Mínimo "
+msgid "Minimal"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/AdminRegister.php:251
 msgid "No actions were taken"
 msgstr ""
 
-#: src/Admin/templates/menu_admin.php:88 src/Admin/templates/menu_admin.php:89
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/style_builder.php:111
+msgid "None"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/preview_frame.php:75
+msgid "Password"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/style_builder.php:140
+msgid "Pill"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/theme_selector.php:35
+msgid "Preview"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/StyleBuilder.php:58
+msgid "Preview template not found"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/ThemeManager.php:87
+msgid "Professional and clean style for business sites"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/preview_frame.php:81
+msgid "Remember Me"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/theme_selector.php:77
+msgid "Reset and Apply Theme"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/style_builder.php:160
+msgid "Reset Changes"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/theme_selector.php:69
+msgid "Reset Style Builder Changes"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/style_builder.php:139
+msgid "Rounded"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/menu_admin.php:103
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/menu_admin.php:104
 msgid "Save images"
 msgstr ""
 
-#: src/Admin/AdminRegister.php:102
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/style_builder.php:161
+msgid "Save Styles"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/style_builder.php:62
+msgid "Select a font"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/AdminRegister.php:111
 msgid "Select the image"
 msgstr ""
 
-#: src/Admin/AdminRegister.php:223
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/style_builder.php:141
+msgid "Shadow"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/menu_admin.php:35
+msgid "Style Builder"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/StyleBuilder.php:167
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/style_builder.php:64
+msgid "System Default"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/StyleBuilder.php:165
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/style_builder.php:63
+msgid "System Fonts"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/style_builder.php:36
+msgctxt "Color del texto"
+msgid "Text Color"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/ThemeManager.php:66
+msgctxt "Estilo por defecto de Login"
+msgid "The default Login AWP style"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/AdminRegister.php:232
 #, php-format
 msgid "The login area %s has been successfully changed."
 msgstr ""
 
-#: src/Admin/AdminRegister.php:233
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/AdminRegister.php:242
 #, php-format
 msgid "The login area %s has not been changed."
 msgstr ""
 
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/ThemeManager.php:311
+msgctxt "Tema no encontrado"
+msgid "Theme not found"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/theme_selector.php:52
+msgctxt "vista previa del tema"
+msgid "Theme Preview"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/ThemeManager.php:342
+msgctxt "tema guerdado con exito"
+msgid "Theme saved successfully"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/menu_admin.php:32
+msgctxt "Temas"
+msgid "Themes"
+msgstr ""
+
 #. Description of the plugin
+msgctxt "Este plugin modifica el area del login del administrador de WordPress"
 msgid "This plugin modifies the login area for WordPress admin"
 msgstr ""
 
-#: src/Admin/templates/menu_admin.php:63
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/style_builder.php:57
+msgid "Typography"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/menu_admin.php:78
+msgctxt "Subir imagen"
 msgid "Upload image"
 msgstr ""
 
-#: src/Admin/templates/menu_admin.php:38
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/menu_admin.php:53
 msgid "Upload logo"
 msgstr ""
 
-#: src/Admin/AdminRegister.php:119
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/preview_frame.php:70
+msgid "Username or Email Address"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/AdminRegister.php:128
 msgid "Verification failed"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/ThemeManager.php:129
+msgid "Vibrant and colorful style"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/StyleBuilder.php:59
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/ThemeManager.php:291
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/ThemeManager.php:324
+msgid "You do not have sufficient permissions"
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/theme_selector.php:72
+msgid ""
+"You have custom styles from the Style Builder. To apply this theme, you need "
+"to reset your Style Builder changes first."
+msgstr ""
+
+#: ../../../../../../../DEV/Login-AWP_WordPress_Plugin/trunk/src/Admin/templates/preview_frame.php:94
+msgid "← Go to Site"
 msgstr ""

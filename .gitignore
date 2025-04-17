@@ -2,3 +2,13 @@ tags/*
 .svn/*
 composer.lock
 **/vendor/*
+
+playwright-report
+test-results
+
+## Node
+
+node_modules
+npm-debug.log
+yarn-error.log
+package-lock.json

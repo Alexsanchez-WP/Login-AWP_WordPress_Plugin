@@ -18,6 +18,7 @@ class StyleBuilder
     public string $dirUrl;
     private string $customStyleTemplate = 'templates/style_builder.php';
     private string $previewTemplate = 'templates/preview_frame.php';
+    private array $i18n = [];
 
     /**
      * Constructor
@@ -38,6 +39,26 @@ class StyleBuilder
         add_action('wp_ajax_login_awp_save_custom_styles', array($this, 'ajaxSaveCustomStyles'));
         add_action('wp_ajax_login_awp_reset_custom_styles', array($this, 'ajaxResetCustomStyles'));
         add_action('wp_ajax_login_awp_get_preview', array($this, 'ajaxGetPreview'));
+        
+        // Inicializar traducciones después de que WordPress esté listo
+        add_action('init', array($this, 'initializeI18n'));
+    }
+    
+    /**
+     * Inicializa las traducciones una vez que WordPress está listo
+     */
+    public function initializeI18n(): void
+    {
+        $this->i18n = [
+            'save_success' => __('Custom styles saved successfully', 'login-awp'),
+            'save_error' => __('Error saving custom styles', 'login-awp'),
+            'reset_success' => __('Custom styles have been reset', 'login-awp'),
+            'reset_error' => __('Error resetting custom styles', 'login-awp'),
+            'confirm_reset' => __('Are you sure you want to reset all custom styles? This cannot be undone.', 'login-awp'),
+            'preview_not_found' => __('Preview template not found', 'login-awp'),
+            'insufficient_permissions' => __('You do not have sufficient permissions', 'login-awp'),
+            'invalid_token' => __('Invalid security token', 'login-awp'),
+        ];
     }
 
     /**
@@ -126,13 +147,7 @@ class StyleBuilder
                         'logo' => esc_url($logo_img),
                         'background' => esc_url($background_img)
                     ),
-                    'i18n' => array(
-                        'save_success' => __('Custom styles saved successfully', 'login-awp'),
-                        'save_error' => __('Error saving custom styles', 'login-awp'),
-                        'reset_success' => __('Custom styles have been reset', 'login-awp'),
-                        'reset_error' => __('Error resetting custom styles', 'login-awp'),
-                        'confirm_reset' => __('Are you sure you want to reset all custom styles? This cannot be undone.', 'login-awp'),
-                    ),
+                    'i18n' => $this->i18n,
                 )
             );
         }
@@ -190,12 +205,12 @@ class StyleBuilder
     {
         // Check permissions and nonce
         if (!current_user_can('manage_options')) {
-            wp_send_json_error(array('message' => __('You do not have sufficient permissions', 'login-awp')));
+            wp_send_json_error(array('message' => $this->i18n['insufficient_permissions']));
             return;
         }
         
         if (!check_ajax_referer('login_awp_style_builder', 'nonce', false)) {
-            wp_send_json_error(array('message' => __('Invalid security token', 'login-awp')));
+            wp_send_json_error(array('message' => $this->i18n['invalid_token']));
             return;
         }
         
@@ -207,9 +222,9 @@ class StyleBuilder
         if ($result) {
             // Also set theme to 'custom'
             update_option(ThemeManager::$themeOptionName, 'custom');
-            wp_send_json_success(array('message' => __('Custom styles saved successfully', 'login-awp')));
+            wp_send_json_success(array('message' => $this->i18n['save_success']));
         } else {
-            wp_send_json_error(array('message' => __('Error saving custom styles', 'login-awp')));
+            wp_send_json_error(array('message' => $this->i18n['save_error']));
         }
         
         wp_die();
@@ -222,7 +237,7 @@ class StyleBuilder
     {
         // Check permissions
         if (!current_user_can('manage_options')) {
-            wp_send_json_error(array('message' => __('You do not have sufficient permissions', 'login-awp')));
+            wp_send_json_error(array('message' => $this->i18n['insufficient_permissions']));
             return;
         }
         
@@ -231,7 +246,7 @@ class StyleBuilder
         $theme_preview_nonce_valid = check_ajax_referer('login_awp_theme_preview', 'nonce', false);
         
         if (!$style_builder_nonce_valid && !$theme_preview_nonce_valid) {
-            wp_send_json_error(array('message' => __('Invalid security token', 'login-awp')));
+            wp_send_json_error(array('message' => $this->i18n['invalid_token']));
             return;
         }
         
@@ -241,7 +256,7 @@ class StyleBuilder
         // Set theme back to default
         update_option(ThemeManager::$themeOptionName, 'default');
         
-        wp_send_json_success(array('message' => __('Custom styles have been reset', 'login-awp')));
+        wp_send_json_success(array('message' => $this->i18n['reset_success']));
         
         wp_die();
     }
@@ -253,7 +268,7 @@ class StyleBuilder
     {
         // Check nonce
         if (!check_ajax_referer('login_awp_preview', '_wpnonce', false)) {
-            wp_die(__('Invalid security token', 'login-awp'));
+            wp_die($this->i18n['invalid_token']);
             return;
         }
         
@@ -262,7 +277,7 @@ class StyleBuilder
             exit;
         }
         
-        wp_die(__('Preview template not found', 'login-awp'));
+        wp_die($this->i18n['preview_not_found']);
     }
 
     /**

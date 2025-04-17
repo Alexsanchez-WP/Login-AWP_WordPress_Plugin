@@ -36,11 +36,28 @@ class Register
 
     public function load(): void
     {
-        add_action(
-            'plugins_loaded',
-            array($this, 'loginAwpTextdomain')
-        );
+        // Registrar primero la carga del textdomain
+        add_action('plugins_loaded', array($this, 'initPlugin'));
+    }
 
+    /**
+     * Inicializa el plugin después de cargar las traducciones
+     */
+    public function initPlugin(): void
+    {
+        $this->initComponents();
+
+        // Primero cargar las traducciones
+        $this->loginAwpTextdomain();
+        
+        // Luego inicializar los componentes del plugin
+    }
+    
+    /**
+     * Inicializa los componentes principales del plugin
+     */
+    protected function initComponents(): void
+    {
         $public = new PublicRegister(dir_url: $this->dirUrl);
         $public->load();
 

@@ -18,7 +18,7 @@ class ThemeManager
     public string $dirUrl;
     public static string $themeOptionName = 'login_awp_selected_theme';
     public static string $customStylesOptionName = 'login_awp_custom_styles';
-    private array $predefinedThemes;
+    private array $predefinedThemes = [];
 
     /**
      * Constructor
@@ -28,7 +28,6 @@ class ThemeManager
     public function __construct(string $dir_url)
     {
         $this->dirUrl = $dir_url . 'assets/';
-        $this->predefinedThemes = $this->registerPredefinedThemes();
     }
 
     /**
@@ -36,9 +35,22 @@ class ThemeManager
      */
     public function load(): void
     {
+        // Registrar eventos después de que WordPress esté completamente cargado
         add_action('admin_enqueue_scripts', array($this, 'enqueueAdminAssets'));
         add_action('wp_ajax_login_awp_preview_theme', array($this, 'ajaxPreviewTheme'));
         add_action('wp_ajax_login_awp_save_theme', array($this, 'ajaxSaveTheme'));
+        
+        // Inicializar los temas predefinidos
+        add_action('init', array($this, 'initializePredefinedThemes'));
+    }
+    
+    /**
+     * Inicializa los temas predefinidos una vez que WordPress está completamente cargado
+     * y las traducciones están disponibles
+     */
+    public function initializePredefinedThemes(): void
+    {
+        $this->predefinedThemes = $this->registerPredefinedThemes();
     }
 
     /**
@@ -164,6 +176,11 @@ class ThemeManager
      */
     public function getThemes(): array
     {
+        // Si los temas aún no están inicializados, inicializarlos aquí
+        if (empty($this->predefinedThemes)) {
+            $this->predefinedThemes = $this->registerPredefinedThemes();
+        }
+        
         return $this->predefinedThemes;
     }
 
@@ -174,6 +191,11 @@ class ThemeManager
      */
     public function getSelectedTheme(): string
     {
+        // Si los temas aún no están inicializados, inicializarlos aquí
+        if (empty($this->predefinedThemes)) {
+            $this->predefinedThemes = $this->registerPredefinedThemes();
+        }
+        
         $selectedTheme = get_option(self::$themeOptionName);
         return $selectedTheme && isset($this->predefinedThemes[$selectedTheme]) 
             ? $selectedTheme 
@@ -188,6 +210,11 @@ class ThemeManager
      */
     public function getThemeConfig(string $theme_key): ?array
     {
+        // Si los temas aún no están inicializarlos, inicializarlos aquí
+        if (empty($this->predefinedThemes)) {
+            $this->predefinedThemes = $this->registerPredefinedThemes();
+        }
+        
         return isset($this->predefinedThemes[$theme_key]) 
             ? $this->predefinedThemes[$theme_key] 
             : null;
@@ -270,6 +297,11 @@ class ThemeManager
             return;
         }
         
+        // Si los temas aún no están inicializados, inicializarlos aquí
+        if (empty($this->predefinedThemes)) {
+            $this->predefinedThemes = $this->registerPredefinedThemes();
+        }
+        
         $theme_key = isset($_POST['theme']) ? sanitize_text_field($_POST['theme']) : '';
         $theme_config = $this->getThemeConfig($theme_key);
         
@@ -298,6 +330,11 @@ class ThemeManager
             return;
         }
         
+        // Si los temas aún no están inicializados, inicializarlos aquí
+        if (empty($this->predefinedThemes)) {
+            $this->predefinedThemes = $this->registerPredefinedThemes();
+        }
+        
         $theme_key = isset($_POST['theme']) ? sanitize_text_field($_POST['theme']) : '';
         
         if (isset($this->predefinedThemes[$theme_key])) {
@@ -318,6 +355,12 @@ class ThemeManager
     public function generateThemeCSS(): string
     {
         $theme_key = $this->getSelectedTheme();
+        
+        // Si los temas aún no están inicializados, inicializarlos aquí
+        if (empty($this->predefinedThemes)) {
+            $this->predefinedThemes = $this->registerPredefinedThemes();
+        }
+        
         $theme = $this->getThemeConfig($theme_key);
         
         if (!$theme) {
