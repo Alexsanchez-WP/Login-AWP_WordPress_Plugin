@@ -14,14 +14,14 @@ namespace Login\Awp\Admin;
 
 class AdminRegister
 {
-    public string $dirUrl;
+    public $dirUrl;
 
-    public static string $imgLogoName = 'login_awp_logo_url';
-    public static string $imgBackName = 'login_awp_background_url';
-    private string $adminTemplate = 'templates/menu_admin.php';
-    private string $messageTemplate = 'templates/status_message.php';
-    private ThemeManager $themeManager;
-    private StyleBuilder $styleBuilder;
+    public static $imgLogoName = 'login_awp_logo_url';
+    public static $imgBackName = 'login_awp_background_url';
+    private $adminTemplate = 'templates/menu_admin.php';
+    private $messageTemplate = 'templates/status_message.php';
+    private $themeManager;
+    private $styleBuilder;
 
     public function __construct($dir_url)
     {
@@ -30,7 +30,7 @@ class AdminRegister
         $this->styleBuilder = new StyleBuilder($dir_url);
     }
 
-    public function load(): void
+    public function load()
     {
         add_action(
             'admin_menu',
@@ -54,24 +54,36 @@ class AdminRegister
             array($this, 'statusMessage')
         );
         
+        // Add the review notice action
+        add_action(
+            'admin_notices',
+            array($this, 'displayReviewNotice')
+        );
+
+        // Add the dismiss review notice action hook
+        add_action(
+            'admin_post_login_awp_dismiss_review_notice',
+            array($this, 'dismissReviewNoticeHandler') 
+        );
+        
         // Load theme manager and style builder components
         $this->themeManager->load();
         $this->styleBuilder->load();
     }
 
-    public function registerSubMenu(): void
+    public function registerSubMenu()
     {
         add_submenu_page(
-            parent_slug: 'themes.php',
-            page_title: __('Login AWP Plugin', 'login-awp'),
-            menu_title: __('Login', 'login-awp'),
-            capability: 'manage_options',
-            menu_slug: 'login-awp',
-            callback: array($this, 'loginAwpSubMenuTemplate')
+            'themes.php',
+            __('Login AWP Plugin', 'login-awp'),
+            __('Login', 'login-awp'),
+            'manage_options',
+            'login-awp',
+            array($this, 'loginAwpSubMenuTemplate')
         );
     }
 
-    public function loginAwpSubMenuTemplate(): void
+    public function loginAwpSubMenuTemplate()
     {
         if (\file_exists(plugin_dir_path(__FILE__) . $this->adminTemplate)) {
             wp_create_nonce('login_awp_form_nonce');
@@ -83,31 +95,31 @@ class AdminRegister
         }
     }
 
-    public function adminStyles(): void
+    public function adminStyles()
     {
         wp_enqueue_style(
-            handle: 'loginAdminCSS',
-            src: $this->dirUrl . 'css/loginAdminStyles.css',
-            deps: array(),
-            ver: '3.0.0'
+            'loginAdminCSS',
+            $this->dirUrl . 'css/loginAdminStyles.css',
+            array(),
+            '3.0.0'
         );
     }
     
-    public function adminScripts(): void
+    public function adminScripts()
     {
         wp_enqueue_media();
         wp_enqueue_script('jquery');
         wp_enqueue_script(
-            handle: 'loginAdminScript',
-            src: $this->dirUrl . 'js/loginAdmin.js',
-            deps: array('jquery'),
-            ver: '3.0.0',
-            args: true
+            'loginAdminScript',
+            $this->dirUrl . 'js/loginAdmin.js',
+            array('jquery'),
+            '3.0.0',
+            true
         );
         wp_localize_script(
-            handle: 'loginAdminScript',
-            object_name: 'login_text',
-            l10n: array(
+            'loginAdminScript',
+            'login_text',
+            array(
                 'text' => __('Select the image', 'login-awp'),
                 'delete_button' => __('Delete image', 'login-awp')
             )
@@ -115,14 +127,14 @@ class AdminRegister
     }
 
 
-    public function loginAwpAdminform(): void
+    public function loginAwpAdminform()
     {
 
         if (
             !isset($_POST['login_awp_form_nonce_field']) ||
             !wp_verify_nonce(
-                nonce: $_POST['login_awp_form_nonce_field'],
-                action: 'login_awp_form_nonce'
+                $_POST['login_awp_form_nonce_field'],
+                'login_awp_form_nonce'
             )
         ) {
             wp_die(__('Verification failed', 'login-awp'));
@@ -141,9 +153,9 @@ class AdminRegister
             ) {
 
                 $message .= $this->updateOption(
-                    upload_data: $upload_img_logo,
-                    message: 'logo_status',
-                    db_file: self::$imgLogoName
+                    $upload_img_logo,
+                    'logo_status',
+                    self::$imgLogoName
                 );
             }
 
@@ -152,9 +164,9 @@ class AdminRegister
                 filter_var($upload_img_back, \FILTER_VALIDATE_URL)
             ) {
                 $message .= $this->updateOption(
-                    upload_data: $upload_img_back,
-                    message: 'background_status',
-                    db_file: self::$imgBackName
+                    $upload_img_back,
+                    'background_status',
+                    self::$imgBackName
                 );
             }
         }
@@ -164,9 +176,9 @@ class AdminRegister
             !is_null($_POST["delete-upload-img-logo-button"])
         ) {
             $message .= $this->updateOption(
-                upload_data: "",
-                message: 'logo_status',
-                db_file: self::$imgLogoName
+                "",
+                'logo_status',
+                self::$imgLogoName
             );
 
         }
@@ -176,9 +188,9 @@ class AdminRegister
             !is_null($_POST["delete-upload-img-back-button"])
         ) {
             $message .= $this->updateOption(
-                upload_data: "",
-                message: 'background_status',
-                db_file: self::$imgBackName
+                "",
+                'background_status',
+                self::$imgBackName
             );
         }
 
@@ -195,7 +207,7 @@ class AdminRegister
      * @param string $db_file
      * @return string
      */
-    private function updateOption($upload_data, $message, $db_file): string
+    private function updateOption($upload_data, $message, $db_file)
     {
         $status = "&{$message}=error";
         $data = sanitize_text_field($upload_data);
@@ -206,7 +218,7 @@ class AdminRegister
         return $status;
     }
 
-    public function statusMessage(): void
+    public function statusMessage()
     {
         if (isset($_GET['logo_status'])) {
             $this->messageTemplate(
@@ -223,7 +235,7 @@ class AdminRegister
         }
     }
 
-    private function messageTemplate($status, $message): void
+    private function messageTemplate($status, $message)
     {
         switch ($status) {
             case 'success':
@@ -255,5 +267,89 @@ class AdminRegister
         if (\file_exists(plugin_dir_path(__FILE__) . $this->messageTemplate)) {
             include_once plugin_dir_path(__FILE__) . $this->messageTemplate;
         }
+    }
+
+    /**
+     * Display the review request admin notice if applicable.
+     * 
+     * Shows a non-intrusive admin notice to administrators after 3 days of plugin usage,
+     * asking for a review on wordpress.org.
+     */
+    public function displayReviewNotice()
+    {
+        // Only show to administrators
+        if (!current_user_can('manage_options')) {
+            return;
+        }
+
+        // Check if the notice has been dismissed
+        $dismissed = get_option('login_awp_review_notice_dismissed', '0');
+        if ('1' === $dismissed) {
+            return;
+        }
+
+        // Check if 24 hours (86400 seconds) have passed since activation
+        $activation_date = get_option('login_awp_activation_date');
+        if (!$activation_date || (time() - $activation_date < 86400)) {
+            return;
+        }
+
+        // Prepare dismiss URL
+        $dismiss_url = add_query_arg(
+            array(
+                'action' => 'login_awp_dismiss_review_notice',
+                '_wpnonce' => wp_create_nonce('login_awp_dismiss_review_nonce')
+            ),
+            admin_url('admin-post.php')
+        );
+
+        // Plugin review URL
+        $review_url = 'https://wordpress.org/support/plugin/login-awp/reviews/?filter=5#new-post';
+
+        ?>
+        <div class="notice notice-info is-dismissible login-awp-review-notice">
+            <p>
+                <?php esc_html_e('Enjoying Login AWP? Please take a moment to rate us! ⭐⭐⭐⭐⭐', 'login-awp'); ?>
+            </p>
+            <p>
+                <a href="<?php echo esc_url($review_url); ?>" class="button button-primary" target="_blank" rel="noopener noreferrer">
+                    <?php esc_html_e('Leave a Review', 'login-awp'); ?>
+                </a>
+                <a href="<?php echo esc_url($dismiss_url); ?>" class="button button-secondary">
+                    <?php esc_html_e('Dismiss Permanently', 'login-awp'); ?>
+                </a>
+            </p>
+        </div>
+        <style>
+            .login-awp-review-notice p { margin-bottom: 10px; }
+            .login-awp-review-notice .button { margin-right: 5px; }
+        </style>
+        <?php
+    }
+
+    /**
+     * Handle the dismissal of the review notice.
+     * 
+     * Sets an option to permanently hide the review notice when the user clicks the dismiss link.
+     * Includes security checks with nonce verification and capability check.
+     */
+    public function dismissReviewNoticeHandler()
+    {
+        // Verify nonce
+        if (!isset($_GET['_wpnonce']) || !wp_verify_nonce(sanitize_key($_GET['_wpnonce']), 'login_awp_dismiss_review_nonce')) {
+            wp_die(esc_html__('Security check failed', 'login-awp'));
+        }
+
+        // Check user capabilities
+        if (!current_user_can('manage_options')) {
+            wp_die(esc_html__('You do not have permission to dismiss this notice.', 'login-awp'));
+        }
+
+        // Update the option to permanently dismiss the notice
+        update_option('login_awp_review_notice_dismissed', '1');
+
+        // Redirect back to the previous page
+        wp_safe_redirect(wp_get_referer() ? wp_get_referer() : admin_url());
+        exit;
     }
 }

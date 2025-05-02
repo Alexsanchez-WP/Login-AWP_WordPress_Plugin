@@ -6,7 +6,7 @@ declare(strict_types=1);
  * Plugin Name: Login AWP
  * Plugin URI: https://wordpress.org/plugins/login-awp
  * Description: This plugin modifies the login area for WordPress admin
- * Version: 3.0.0
+ * Version: 3.1.0
  * Requires at least: 5.4
  * Requires PHP: 7.4
  * Author: AWP-Software
@@ -18,14 +18,29 @@ declare(strict_types=1);
  * https://www.gnu.org/licenses/gpl-3.0.html
  */
 
-
-if (!defined(constant_name: 'ABSPATH')) {
+if (!defined('ABSPATH')) {
     die('You are not allowed to call this page directly.');
 }
-
 require_once __DIR__ . '/vendor/autoload.php';
 
 use Login\Awp\Register;
+
+
+// Activation hook to store activation time for the review notice
+register_activation_hook(__FILE__, 'login_awp_activation_hook');
+
+/**
+ * Store plugin activation time for the review notice.
+ */
+function login_awp_activation_hook() {
+    if (false === get_option('login_awp_activation_date')) {
+        add_option('login_awp_activation_date', time());
+    }
+    // Also add the option for dismissal tracking, default to not dismissed
+    if (false === get_option('login_awp_review_notice_dismissed')) {
+        add_option('login_awp_review_notice_dismissed', '0');
+    }
+}
 
 $register = new Register(
     plugin_dir_url(__FILE__),
