@@ -15,17 +15,17 @@ namespace Login\Awp\Admin;
 
 class ThemeManager
 {
-    public string $dirUrl;
-    public static string $themeOptionName = 'login_awp_selected_theme';
-    public static string $customStylesOptionName = 'login_awp_custom_styles';
-    private array $predefinedThemes = [];
+    public $dirUrl;
+    public static $themeOptionName = 'login_awp_selected_theme';
+    public static $customStylesOptionName = 'login_awp_custom_styles';
+    private $predefinedThemes = [];
 
     /**
      * Constructor
      *
      * @param string $dir_url Plugin directory URL
      */
-    public function __construct(string $dir_url)
+    public function __construct($dir_url)
     {
         $this->dirUrl = $dir_url . 'assets/';
     }
@@ -33,7 +33,7 @@ class ThemeManager
     /**
      * Initialize the theme manager
      */
-    public function load(): void
+    public function load()
     {
         // Registrar eventos después de que WordPress esté completamente cargado
         add_action('admin_enqueue_scripts', array($this, 'enqueueAdminAssets'));
@@ -48,7 +48,7 @@ class ThemeManager
      * Inicializa los temas predefinidos una vez que WordPress está completamente cargado
      * y las traducciones están disponibles
      */
-    public function initializePredefinedThemes(): void
+    public function initializePredefinedThemes()
     {
         $this->predefinedThemes = $this->registerPredefinedThemes();
     }
@@ -58,7 +58,7 @@ class ThemeManager
      *
      * @return array Array of predefined themes
      */
-    private function registerPredefinedThemes(): array
+    private function registerPredefinedThemes()
     {
         return [
             'default' => [
@@ -174,7 +174,7 @@ class ThemeManager
      *
      * @return array List of available themes
      */
-    public function getThemes(): array
+    public function getThemes()
     {
         // Si los temas aún no están inicializados, inicializarlos aquí
         if (empty($this->predefinedThemes)) {
@@ -189,7 +189,7 @@ class ThemeManager
      *
      * @return string Theme key
      */
-    public function getSelectedTheme(): string
+    public function getSelectedTheme()
     {
         // Si los temas aún no están inicializados, inicializarlos aquí
         if (empty($this->predefinedThemes)) {
@@ -208,7 +208,7 @@ class ThemeManager
      * @param string $theme_key Theme identifier
      * @return array|null Theme configuration or null if not found
      */
-    public function getThemeConfig(string $theme_key): ?array
+    public function getThemeConfig($theme_key)
     {
         // Si los temas aún no están inicializarlos, inicializarlos aquí
         if (empty($this->predefinedThemes)) {
@@ -223,7 +223,7 @@ class ThemeManager
     /**
      * Enqueue admin assets for theme management
      */
-    public function enqueueAdminAssets(): void
+    public function enqueueAdminAssets()
     {
         $screen = get_current_screen();
         
@@ -284,7 +284,7 @@ class ThemeManager
     /**
      * AJAX handler for theme preview
      */
-    public function ajaxPreviewTheme(): void
+    public function ajaxPreviewTheme()
     {
         // Check permissions and nonce
         if (!current_user_can('manage_options')) {
@@ -317,7 +317,7 @@ class ThemeManager
     /**
      * AJAX handler for saving theme
      */
-    public function ajaxSaveTheme(): void
+    public function ajaxSaveTheme()
     {
         // Check permissions and nonce
         if (!current_user_can('manage_options')) {
@@ -352,7 +352,7 @@ class ThemeManager
      *
      * @return string Generated CSS
      */
-    public function generateThemeCSS(): string
+    public function generateThemeCSS()
     {
         $theme_key = $this->getSelectedTheme();
         

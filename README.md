@@ -24,6 +24,7 @@ This plugin improves the login look for the website and defaults to the page log
 * Just activating it already adds personality to the login
 * Choose from pre-designed themes to instantly transform your login page
 * Create your own custom theme with the Style Builder
+* User-friendly feedback system for continuous improvement
 
 ## Features
 
@@ -44,9 +45,40 @@ This plugin improves the login look for the website and defaults to the page log
 * Fine-tune borders, margins, and padding
 * Live preview of changes
 
+### User Feedback
+* Unobtrusive review request system for administrators
+* Helps improve the plugin through user suggestions
+* Fully dismissible with permanent opt-out
+
 ## Frequently Asked Questions
 
 [Link Wiki](https://github.com/AWP-Software/Login-AWP_WordPress_Plugin/wiki/Frequently-Asked-Questions)
+
+## Changelog
+
+### 3.1.0
+* Added user feedback system for administrators to help improve the plugin
+* Enhanced compatibility with older PHP versions
+* Fixed various minor styling issues 
+
+### 3.0.0
+* Added theme selection system with pre-designed layouts
+* Visual Style Builder for advanced customization
+* Custom fonts, colors, spacing, and border settings
+
+### 2.1.0
+* Added status notifications for image updates
+* Added Spanish language translation
+
+### 2.0.0
+* Plugin moved to Appearance menu for easier access
+* Added logo and background image customization
+
+### 1.1.0
+* Fixed: Automatically display custom site icon on login page if available
+
+### 1.0.0
+* Initial stable release
 
 ## About 
 [Vegas2 JS](https://vegas.jaysalvat.com/)
