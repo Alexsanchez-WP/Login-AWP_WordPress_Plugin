@@ -40,6 +40,25 @@ function login_awp_activation_hook() {
     if (false === get_option('login_awp_review_notice_dismissed')) {
         add_option('login_awp_review_notice_dismissed', '0');
     }
+    
+    // Initialize feedback options
+    if (false === get_option('login_awp_feedback_email')) {
+        add_option('login_awp_feedback_email', get_option('admin_email'));
+    }
+    if (false === get_option('login_awp_feedback_webhook')) {
+        add_option('login_awp_feedback_webhook', '');
+    }
+}
+
+// Register deactivation feedback hook
+register_deactivation_hook(__FILE__, 'login_awp_deactivation_hook');
+
+/**
+ * Track plugin deactivation for the feedback popup.
+ */
+function login_awp_deactivation_hook() {
+    // This function intentionally left empty
+    // The popup is handled via JavaScript before deactivation
 }
 
 $register = new Register(

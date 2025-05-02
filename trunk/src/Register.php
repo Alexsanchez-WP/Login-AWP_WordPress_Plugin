@@ -13,6 +13,7 @@ namespace Login\Awp;
 
 use Login\Awp\Public\PublicRegister;
 use Login\Awp\Admin\AdminRegister;
+use Login\Awp\Admin\FeedbackManager;
 
 class Register
 {
@@ -63,6 +64,10 @@ class Register
 
         $admin = new AdminRegister(dir_url: $this->dirUrl);
         $admin->load();
+        
+        // Initialize the feedback manager
+        $feedback = new FeedbackManager(dir_url: $this->dirUrl);
+        $feedback->load();
     }
 
     public function loginAwpTextdomain(): void
