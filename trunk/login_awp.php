@@ -25,7 +25,6 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 use Login\Awp\Register;
 
-
 // Activation hook to store activation time for the review notice
 register_activation_hook(__FILE__, 'login_awp_activation_hook');
 

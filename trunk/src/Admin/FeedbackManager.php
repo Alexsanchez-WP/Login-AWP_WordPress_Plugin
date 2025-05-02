@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Handles feedback collection when plugin is deactivated
+ * Handles feedback collection when plugin is deactivated or deleted
  *
  * @author AWP-Software
  * @since 3.1.0
@@ -28,7 +28,7 @@ class FeedbackManager
             return;
         }
         
-        // Add scripts and styles for the deactivation modal
+        // Add scripts and styles for the feedback modal
         add_action('admin_enqueue_scripts', array($this, 'enqueueScripts'));
         
         // Add the modal HTML to the admin footer
@@ -75,7 +75,12 @@ class FeedbackManager
                     'intro' => __('If you have a moment, please let us know why you are deactivating Login AWP:', 'login-awp'),
                     'skip' => __('Skip & Deactivate', 'login-awp'),
                     'submit' => __('Submit & Deactivate', 'login-awp'),
-                    'cancel' => __('Cancel', 'login-awp')
+                    'cancel' => __('Cancel', 'login-awp'),
+                    'deletion_heading' => __('Quick Feedback Before Deleting', 'login-awp'),
+                    'deletion_intro' => __('If you have a moment, please let us know why you are deleting Login AWP:', 'login-awp'),
+                    'skip_delete' => __('Skip & Delete', 'login-awp'),
+                    'submit_delete' => __('Submit & Delete', 'login-awp'),
+                    'submitting' => __('Submitting...', 'login-awp')
                 )
             )
         );
@@ -92,8 +97,8 @@ class FeedbackManager
         ?>
         <div id="login-awp-feedback-modal" style="display:none;">
             <div class="login-awp-feedback-modal-content">
-                <h2><?php esc_html_e('Quick Feedback', 'login-awp'); ?></h2>
-                <p><?php esc_html_e('If you have a moment, please let us know why you are deactivating Login AWP:', 'login-awp'); ?></p>
+                <h2 id="login-awp-feedback-title"><?php esc_html_e('Quick Feedback', 'login-awp'); ?></h2>
+                <p id="login-awp-feedback-intro"><?php esc_html_e('If you have a moment, please let us know why you are deactivating Login AWP:', 'login-awp'); ?></p>
                 
                 <form id="login-awp-feedback-form">
                     <div class="login-awp-feedback-options">
@@ -154,6 +159,7 @@ class FeedbackManager
         }
         
         $reason = isset($_POST['reason']) ? sanitize_text_field($_POST['reason']) : '';
+        $action_type = isset($_POST['action_type']) ? sanitize_text_field($_POST['action_type']) : 'deactivate';
         $email = '';
         $details = '';
         
@@ -177,6 +183,7 @@ class FeedbackManager
             'reason' => $reason,
             'details' => $details,
             'email' => $email,
+            'action_type' => $action_type,
             'site_url' => home_url(),
             'plugin_version' => '3.1.0',
             'wp_version' => get_bloginfo('version'),
@@ -201,9 +208,17 @@ class FeedbackManager
             return false;
         }
         
-        $subject = sprintf(__('[Login AWP] Feedback from %s', 'login-awp'), parse_url(home_url(), PHP_URL_HOST));
+        $action_type = isset($feedback['action_type']) && $feedback['action_type'] === 'delete' ? 
+            __('deletion', 'login-awp') : 
+            __('deactivation', 'login-awp');
+            
+        $subject = sprintf(__('[Login AWP] %s Feedback from %s', 'login-awp'), 
+            ucfirst($action_type),
+            parse_url(home_url(), PHP_URL_HOST)
+        );
         
-        $message = sprintf(__('Reason: %s', 'login-awp'), $this->getReadableReason($feedback['reason'])) . "\n\n";
+        $message = sprintf(__('Action: %s', 'login-awp'), ucfirst($action_type)) . "\n";
+        $message .= sprintf(__('Reason: %s', 'login-awp'), $this->getReadableReason($feedback['reason'])) . "\n\n";
         
         if (!empty($feedback['details'])) {
             $message .= sprintf(__('Details: %s', 'login-awp'), $feedback['details']) . "\n\n";
@@ -235,7 +250,7 @@ class FeedbackManager
         
         // Format feedback for webhook
         $data = array(
-            'feedback_type' => 'deactivation',
+            'feedback_type' => isset($feedback['action_type']) ? $feedback['action_type'] : 'deactivation',
             'feedback' => $feedback
         );
         
@@ -302,20 +317,20 @@ class FeedbackManager
     
     public function renderSettingsSection()
     {
-        echo '<p>' . esc_html__('Configure where feedback should be sent when users deactivate the plugin.', 'login-awp') . '</p>';
+        echo '<p>' . esc_html__('Configure where feedback should be sent when users deactivate or delete the plugin.', 'login-awp') . '</p>';
     }
     
     public function renderEmailField()
     {
         $email = get_option('login_awp_feedback_email', get_option('admin_email'));
         echo '<input type="email" name="login_awp_feedback_email" value="' . esc_attr($email) . '" class="regular-text">';
-        echo '<p class="description">' . esc_html__('Email address where deactivation feedback will be sent.', 'login-awp') . '</p>';
+        echo '<p class="description">' . esc_html__('Email address where feedback will be sent.', 'login-awp') . '</p>';
     }
     
     public function renderWebhookField()
     {
         $webhook = get_option('login_awp_feedback_webhook', '');
         echo '<input type="url" name="login_awp_feedback_webhook" value="' . esc_attr($webhook) . '" class="regular-text">';
-        echo '<p class="description">' . esc_html__('Optional webhook URL where deactivation feedback will be sent in JSON format.', 'login-awp') . '</p>';
+        echo '<p class="description">' . esc_html__('Optional webhook URL where feedback will be sent in JSON format.', 'login-awp') . '</p>';
     }
 }
