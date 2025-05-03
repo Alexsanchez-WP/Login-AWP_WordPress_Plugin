@@ -1,7 +1,7 @@
 /**
  * Feedback Modal JavaScript for Login AWP
  *
- * Handles the deactivation and deletion feedback modal functionality
+ * Handles the deactivation feedback modal functionality
  */
 (function($) {
     'use strict';
@@ -16,9 +16,6 @@
         
         // Set up for deactivation link
         setupDeactivationFeedback();
-        
-        // Set up delegation for delete links (which may be added dynamically)
-        setupDeletionFeedback();
         
         /**
          * Set up feedback for deactivation
@@ -37,89 +34,22 @@
                 });
             }
         }
-        
-        /**
-         * Set up feedback for deletion using multiple methods to ensure we catch all deletion scenarios
-         * This is necessary because delete links are often added dynamically after plugin deactivation
-         */
-        function setupDeletionFeedback() {
-            // Method 1: Direct plugin row delete link
-            $(document).on('click', 'tr[data-slug="' + baseSlug + '"] .delete a', function(e) {
-                e.preventDefault();
-                showModal($(this).attr('href'), 'delete');
-            });
-            
-            // Method 2: Listen for any delete link that contains our plugin slug
-            $(document).on('click', 'a[href*="plugins.php"][href*="action=delete-selected"][href*="' + baseSlug + '"]', function(e) {
-                e.preventDefault();
-                showModal($(this).attr('href'), 'delete');
-            });
-            
-            // Method 3: Plugin actions row (where delete appears after deactivation)
-            $(document).on('click', '.row-actions .delete a[href*="' + baseSlug + '"]', function(e) {
-                e.preventDefault();
-                showModal($(this).attr('href'), 'delete');
-            });
-            
-            // Method 4: Capture "Delete" confirmation in plugins.php page
-            $(document).on('click', '.plugins-php #submit[value="Yes, Delete these files"]', function(e) {
-                // Check if our plugin is being deleted
-                if (window.location.href.indexOf(baseSlug) !== -1 || 
-                    $('input[name="checked[]"][value*="' + baseSlug + '"]').length) {
-                    e.preventDefault();
-                    showModal(window.location.href, 'delete');
-                }
-            });
-            
-            // Method 5: Bulk actions dropdown
-            $('#bulk-action-form').on('submit', function(e) {
-                const action = $('#bulk-action-selector-top, #bulk-action-selector-bottom').val();
-                
-                if (action === 'delete') {
-                    // Check if our plugin is selected
-                    const isPluginSelected = $('input[name="checked[]"][value*="' + baseSlug + '"]:checked').length > 0;
-                    
-                    if (isPluginSelected) {
-                        e.preventDefault();
-                        showModal($(this).attr('action') + '?' + $(this).serialize(), 'delete');
-                    }
-                }
-            });
-            
-            // Method 6: Override confirm dialog for delete
-            const originalConfirm = window.confirm;
-            window.confirm = function(message) {
-                if (message.indexOf('delete') !== -1 && window.location.href.indexOf(baseSlug) !== -1) {
-                    showModal(window.location.href, 'delete');
-                    return false;
-                }
-                return originalConfirm.apply(this, arguments);
-            };
-        }
 
         /**
          * Show the feedback modal
          * @param {string} actionUrl - The URL to redirect to after submission
-         * @param {string} actionType - Either 'deactivate' or 'delete'
+         * @param {string} actionType - 'deactivate'
          */
         function showModal(actionUrl, actionType) {
             $('#login-awp-feedback-modal').show();
             
-            // Update modal title based on action type
-            if (actionType === 'delete') {
-                $('#login-awp-feedback-title').text(loginAwpFeedback.translations.deletion_heading || 'Quick Feedback Before Deleting');
-                $('#login-awp-feedback-intro').text(loginAwpFeedback.translations.deletion_intro || 'If you have a moment, please let us know why you are deleting Login AWP:');
-                $('#login-awp-skip-feedback').text(loginAwpFeedback.translations.skip_delete || 'Skip & Delete');
-                $('#login-awp-submit-feedback').text(loginAwpFeedback.translations.submit_delete || 'Submit & Delete');
-            } else {
-                $('#login-awp-feedback-title').text(loginAwpFeedback.translations.heading || 'Quick Feedback');
-                $('#login-awp-feedback-intro').text(loginAwpFeedback.translations.intro || 'If you have a moment, please let us know why you are deactivating Login AWP:');
-                $('#login-awp-skip-feedback').text(loginAwpFeedback.translations.skip || 'Skip & Deactivate');
-                $('#login-awp-submit-feedback').text(loginAwpFeedback.translations.submit || 'Submit & Deactivate');
-            }
+            // Update modal title and text
+            $('#login-awp-feedback-title').text(loginAwpFeedback.translations.heading || 'Quick Feedback');
+            $('#login-awp-feedback-intro').text(loginAwpFeedback.translations.intro || 'If you have a moment, please let us know why you are deactivating Login AWP:');
+            $('#login-awp-skip-feedback').text(loginAwpFeedback.translations.skip || 'Skip & Deactivate');
+            $('#login-awp-submit-feedback').text(loginAwpFeedback.translations.submit || 'Submit & Deactivate');
             
-            // Store the action type and URL for form submission
-            $('#login-awp-feedback-form').data('actionType', actionType);
+            // Store the action URL for form submission
             $('#login-awp-feedback-form').data('actionUrl', actionUrl);
             
             setupModalEvents();
@@ -196,7 +126,6 @@
             const form = $('#login-awp-feedback-form');
             const actionUrl = form.data('actionUrl');
             const reason = form.find('input[name="reason"]:checked').val();
-            const actionType = form.data('actionType') || 'deactivate';
             
             // If no reason selected, just proceed with action
             if (!reason) {
@@ -219,7 +148,7 @@
                 action: 'login_awp_submit_feedback',
                 nonce: loginAwpFeedback.nonce,
                 reason: reason,
-                action_type: actionType
+                action_type: 'deactivate'
             };
 
             // Add additional data if provided
