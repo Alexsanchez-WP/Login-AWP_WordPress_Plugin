@@ -15,7 +15,6 @@ if (!defined('WP_UNINSTALL_PLUGIN')) {
 require_once __DIR__ . '/vendor/autoload.php';
 
 use Login\Awp\Admin\AdminRegister;
-use Login\Awp\Admin\FeedbackManager;
 use Login\Awp\Admin\ThemeManager;
 
 // Delete plugin settings
@@ -28,17 +27,6 @@ delete_site_option(AdminRegister::$imgLogoName);
 delete_site_option(AdminRegister::$imgBackName);
 delete_site_option(AdminRegister::$activateDateOption);
 delete_site_option(AdminRegister::$reviewNoticeDismissedOption);
-
-// Delete feedback settings
-delete_option(FeedbackManager::$activateDateOption);
-delete_option(FeedbackManager::$reviewNoticeDismissedOption);
-delete_option(FeedbackManager::$feedbackEmailOption);
-delete_option(FeedbackManager::$feedbackWebhookOption);
-
-delete_site_option(FeedbackManager::$activateDateOption);
-delete_site_option(FeedbackManager::$reviewNoticeDismissedOption);
-delete_site_option(FeedbackManager::$feedbackEmailOption);
-delete_site_option(FeedbackManager::$feedbackWebhookOption);
 
 // Delete custom theme settings
 delete_option(ThemeManager::$themeOptionName);

@@ -8,6 +8,9 @@
 
     // Initialize once DOM is fully loaded
     $(function() {
+        // Make sure we have the proper AJAX URL from the localized script
+        const ajaxUrl = loginAwpFeedback.ajax_url || window.ajaxurl || '/wp-admin/admin-ajax.php';
+        
         const pluginSlug = loginAwpFeedback.plugin_slug;
         const baseSlug = pluginSlug.split('/')[0];
         
@@ -241,14 +244,25 @@
             submitButton.text(loginAwpFeedback.translations.submitting || 'Submitting...');
             submitButton.prop('disabled', true);
 
-            // Send the data
-            $.post(loginAwpFeedback.ajax_url, data, function() {
-                // After submitting feedback, proceed with action
+            // Use a try-catch block to handle AJAX errors
+            try {
+                // Send the data to the correct AJAX URL
+                $.post(ajaxUrl, data)
+                    .done(function(response) {
+                        // After submitting feedback, proceed with action
+                        window.location.href = actionUrl;
+                    })
+                    .fail(function(xhr, textStatus, errorThrown) {
+                        // Log error details for debugging but still proceed with action
+                        console.error('Feedback submission failed:', textStatus, errorThrown);
+                        // Still proceed with the requested action even if feedback fails
+                        window.location.href = actionUrl;
+                    });
+            } catch(e) {
+                // If any error occurs, still proceed with the action
+                console.error('Error during feedback submission:', e);
                 window.location.href = actionUrl;
-            }).fail(function() {
-                // If submission fails, still proceed
-                window.location.href = actionUrl;
-            });
+            }
         }
 
         /**

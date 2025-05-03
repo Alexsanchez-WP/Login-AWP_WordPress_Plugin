@@ -78,8 +78,8 @@ class PublicRegister
             true
         );
         wp_enqueue_script(
-            'loginJS',
-            $this->dirUrl . 'js/loginJS.js',
+            'loginJs',
+            $this->dirUrl . 'js/loginJs.js',
             array('jquery'),
             '1.0.0',
             true
@@ -99,7 +99,7 @@ class PublicRegister
             $this->dirUrl . 'img/slider.jpg';
 
         wp_localize_script(
-            'loginJS',
+            'loginJs',
             'login_imagenes',
             array(
                 'logo' => esc_url($upload_img_logo),

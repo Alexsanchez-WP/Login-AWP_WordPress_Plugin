@@ -7,7 +7,7 @@ declare(strict_types=1);
  *
  * @author AWP-Software
  * @since 3.1.0
- * @version 3.1.0
+ * @version 3.2.0
  */
 
 namespace Login\Awp\Admin;
@@ -19,8 +19,8 @@ class FeedbackManager
     public static $reviewNoticeDismissedOption = 'login_awp_review_notice_dismissed';
     public static $feedbackEmailOption = 'login_awp_feedback_email';
     public static $feedbackWebhookOption = 'login_awp_feedback_webhook';
-    public static $feedbackEmailDefault = AWP_LOGIN_FEEDBACK_EMAIL;
-    public static $feedbackWebhookDefault = AWP_LOGIN_FEEDBACK_WEBHOOK;
+    public static $feedbackEmailDefault = ''; // Valor vacío por defecto
+    public static $feedbackWebhookDefault = ''; // Valor vacío por defecto
     public static $feedbackEmailDescription = 'Email address where feedback will be sent.';
     public static $feedbackWebhookDescription = 'Webhook URL where feedback will be sent.';
 
@@ -28,6 +28,16 @@ class FeedbackManager
     public function __construct($dir_url)
     {
         $this->dirUrl = $dir_url . 'assets/';
+        
+        // Establecer valor predeterminado para el email de feedback si está definido
+        if (defined('AWP_LOGIN_FEEDBACK_EMAIL')) {
+            self::$feedbackEmailDefault = AWP_LOGIN_FEEDBACK_EMAIL;
+        }
+        
+        // Establecer valor predeterminado para el webhook de feedback si está definido
+        if (defined('AWP_LOGIN_FEEDBACK_WEBHOOK')) {
+            self::$feedbackWebhookDefault = AWP_LOGIN_FEEDBACK_WEBHOOK;
+        }
     }
 
     public function load()
@@ -77,14 +87,14 @@ class FeedbackManager
             'login-awp-feedback-css',
             $this->dirUrl . 'css/feedback-modal.css',
             array(),
-            '3.1.0'
+            '3.2.0'
         );
 
         wp_enqueue_script(
             'login-awp-feedback-js',
             $this->dirUrl . 'js/feedback-modal.js',
             array('jquery'),
-            '3.1.0',
+            '3.2.0',
             true
         );
 
@@ -92,7 +102,7 @@ class FeedbackManager
             'login-awp-feedback-js',
             'loginAwpFeedback',
             array(
-                'ajax_url' => admin_url('admin-ajax.php'),
+                'ajax_url' => admin_url('admin-ajax.php'), 
                 'nonce' => wp_create_nonce('login_awp_feedback_nonce'),
                 'plugin_slug' => 'login-awp/login_awp.php',
                 'translations' => array(
@@ -182,12 +192,12 @@ class FeedbackManager
             wp_send_json_error('Invalid nonce');
             return;
         }
-
+        
         $reason = isset($_POST['reason']) ? sanitize_text_field($_POST['reason']) : '';
         $action_type = isset($_POST['action_type']) ? sanitize_text_field($_POST['action_type']) : 'deactivate';
         $email = '';
         $details = '';
-
+        
         // Get reason details if provided
         if ($reason === 'found_better_plugin' && isset($_POST['better_plugin'])) {
             $details = sanitize_text_field($_POST['better_plugin']);
@@ -196,13 +206,13 @@ class FeedbackManager
         } elseif ($reason === 'other' && isset($_POST['other_details'])) {
             $details = sanitize_textarea_field($_POST['other_details']);
         }
-
+        
         // Get user email if they opted to include it
         if (isset($_POST['include_email']) && $_POST['include_email'] === '1') {
             $current_user = wp_get_current_user();
             $email = $current_user->user_email;
         }
-
+        
         // Prepare feedback message
         $feedback = array(
             'reason' => $reason,
@@ -210,54 +220,75 @@ class FeedbackManager
             'email' => $email,
             'action_type' => $action_type,
             'site_url' => home_url(),
-            // Get plugin data from WordPress
-            // 'plugin_name' => get_plugin_data(WP_PLUGIN_DIR . '/login-awp/login_awp.php')['Name'],
-            'plugin_version' => get_plugin_data(WP_PLUGIN_DIR . '/login-awp/login_awp.php')['Version'],
+            'plugin_name' => 'Login AWP',
+            'plugin_version' => '3.2.0',
             'wp_version' => get_bloginfo('version'),
             'php_version' => phpversion(),
             'timestamp' => current_time('mysql')
         );
-
-        // Send email
-        $this->sendFeedbackEmail($feedback);
-
-        // Send to webhook if configured
-        $this->sendFeedbackWebhook($feedback);
-
-        wp_send_json_success('Feedback submitted successfully');
+        
+        $email_result = false;
+        $webhook_result = false;
+        
+        // Try to send email with error handling
+        try {
+            $email_result = $this->sendFeedbackEmail($feedback);
+        } catch (\Exception $e) {
+            error_log('Login AWP: Email feedback error - ' . $e->getMessage());
+            // Don't stop execution, just log the error
+        }
+        
+        // Try to send to webhook with error handling
+        try {
+            $webhook_result = $this->sendFeedbackWebhook($feedback);
+        } catch (\Exception $e) {
+            error_log('Login AWP: Webhook feedback error - ' . $e->getMessage());
+            // Don't stop execution, just log the error
+        }
+        
+        wp_send_json_success(array(
+            'message' => 'Feedback submitted successfully',
+            'email_sent' => $email_result,
+            'webhook_sent' => $webhook_result
+        ));
     }
-
+    
     private function sendFeedbackEmail($feedback)
     {
-        $to = get_option('login_awp_feedback_email', get_option('admin_email'));
-
+        $to = get_option(self::$feedbackEmailOption, self::$feedbackEmailDefault);
+        
+        // Si no hay destinatario configurado, usar el email del administrador
         if (empty($to)) {
-            return false;
+            $to = get_option('admin_email');
+            
+            // Si seguimos sin tener un email, no podemos enviar el feedback
+            if (empty($to)) {
+                return false;
+            }
         }
-
-        $action_type = isset($feedback['action_type']) && $feedback['action_type'] === 'delete' ?
-            __('deletion', 'login-awp') :
+        
+        $action_type = isset($feedback['action_type']) && $feedback['action_type'] === 'delete' ? 
+            __('deletion', 'login-awp') : 
             __('deactivation', 'login-awp');
-
-        $subject = sprintf(
-            __('[Login AWP] %s Feedback from %s', 'login-awp'),
+            
+        $subject = sprintf(__('[Login AWP] %s Feedback from %s', 'login-awp'), 
             ucfirst($action_type),
             parse_url(home_url(), PHP_URL_HOST)
         );
-
+        
         $message = sprintf(__('Action: %s', 'login-awp'), ucfirst($action_type)) . "\n";
         $message .= sprintf(__('Reason: %s', 'login-awp'), $this->getReadableReason($feedback['reason'])) . "\n\n";
-
+        
         if (!empty($feedback['details'])) {
             $message .= sprintf(__('Details: %s', 'login-awp'), $feedback['details']) . "\n\n";
         }
-
+        
         $message .= sprintf(__('Site URL: %s', 'login-awp'), $feedback['site_url']) . "\n";
-        // $message .= sprintf(__('Plugin name: %s', 'login-awp'), $feedback[]) . "\n";
+        $message .= sprintf(__('Plugin name: %s', 'login-awp'), $feedback['plugin_name']) . "\n";
         $message .= sprintf(__('Plugin version: %s', 'login-awp'), $feedback['plugin_version']) . "\n";
         $message .= sprintf(__('WordPress version: %s', 'login-awp'), $feedback['wp_version']) . "\n";
         $message .= sprintf(__('PHP version: %s', 'login-awp'), $feedback['php_version']) . "\n";
-
+        
         if (!empty($feedback['email'])) {
             $message .= sprintf(__('User email: %s', 'login-awp'), $feedback['email']) . "\n";
             $headers = array('Reply-To: ' . $feedback['email']);
@@ -265,37 +296,50 @@ class FeedbackManager
             $message .= __('User email: Anonymous', 'login-awp') . "\n";
             $headers = array();
         }
-
+        
         return wp_mail($to, $subject, $message, $headers);
     }
-
+    
     private function sendFeedbackWebhook($feedback)
     {
-        $webhook_url = get_option('login_awp_feedback_webhook', '');
-
+        $webhook_url = get_option(self::$feedbackWebhookOption, self::$feedbackWebhookDefault);
+        
         if (empty($webhook_url)) {
             return false;
         }
-
+        
         // Format feedback for webhook
         $data = array(
             'feedback_type' => isset($feedback['action_type']) ? $feedback['action_type'] : 'deactivation',
             'feedback' => $feedback
         );
-
-        // Send to webhook
+        
+        // Send to webhook with error handling
         $response = wp_remote_post($webhook_url, array(
             'method' => 'POST',
             'timeout' => 45,
             'redirection' => 5,
             'httpversion' => '1.0',
-            'blocking' => false,
+            'blocking' => true, // Cambio a true para capturar errores
             'headers' => array('Content-Type' => 'application/json'),
             'body' => wp_json_encode($data),
             'cookies' => array()
         ));
-
-        return !is_wp_error($response);
+        
+        // Verificar si hubo un error en la solicitud
+        if (is_wp_error($response)) {
+            error_log('Login AWP: Webhook error - ' . $response->get_error_message());
+            return false;
+        }
+        
+        // Verificar el código de respuesta HTTP
+        $http_code = wp_remote_retrieve_response_code($response);
+        if ($http_code >= 400) {
+            error_log('Login AWP: Webhook HTTP error - ' . $http_code);
+            return false;
+        }
+        
+        return true;
     }
 
     private function getReadableReason($reason)
