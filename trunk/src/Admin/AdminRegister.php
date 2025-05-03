@@ -18,6 +18,8 @@ class AdminRegister
 
     public static $imgLogoName = 'login_awp_logo_url';
     public static $imgBackName = 'login_awp_background_url';
+    public static $activateDateOption = 'login_awp_activation_date';
+    public static $reviewNoticeDismissedOption = 'login_awp_review_notice_dismissed';
     private $adminTemplate = 'templates/menu_admin.php';
     private $messageTemplate = 'templates/status_message.php';
     private $themeManager;
@@ -53,7 +55,7 @@ class AdminRegister
             'admin_notices',
             array($this, 'statusMessage')
         );
-        
+
         // Add the review notice action
         add_action(
             'admin_notices',
@@ -63,9 +65,9 @@ class AdminRegister
         // Add the dismiss review notice action hook
         add_action(
             'admin_post_login_awp_dismiss_review_notice',
-            array($this, 'dismissReviewNoticeHandler') 
+            array($this, 'dismissReviewNoticeHandler')
         );
-        
+
         // Load theme manager and style builder components
         $this->themeManager->load();
         $this->styleBuilder->load();
@@ -87,10 +89,10 @@ class AdminRegister
     {
         if (\file_exists(plugin_dir_path(__FILE__) . $this->adminTemplate)) {
             wp_create_nonce('login_awp_form_nonce');
-            
+
             // Current active tab
             $active_tab = isset($_GET['tab']) ? sanitize_text_field($_GET['tab']) : 'general';
-            
+
             include_once plugin_dir_path(__FILE__) . $this->adminTemplate;
         }
     }
@@ -104,7 +106,7 @@ class AdminRegister
             '3.0.0'
         );
     }
-    
+
     public function adminScripts()
     {
         wp_enqueue_media();
@@ -180,7 +182,6 @@ class AdminRegister
                 'logo_status',
                 self::$imgLogoName
             );
-
         }
 
         if (
@@ -283,13 +284,13 @@ class AdminRegister
         }
 
         // Check if the notice has been dismissed
-        $dismissed = get_option('login_awp_review_notice_dismissed', '0');
+        $dismissed = get_option(self::$reviewNoticeDismissedOption, '0');
         if ('1' === $dismissed) {
             return;
         }
 
         // Check if 24 hours (86400 seconds) have passed since activation
-        $activation_date = get_option('login_awp_activation_date');
+        $activation_date = get_option(self::$activateDateOption);
         if (!$activation_date || (time() - $activation_date < 86400)) {
             return;
         }
@@ -306,7 +307,7 @@ class AdminRegister
         // Plugin review URL
         $review_url = 'https://wordpress.org/support/plugin/login-awp/reviews/?filter=5#new-post';
 
-        ?>
+?>
         <div class="notice notice-info is-dismissible login-awp-review-notice">
             <p>
                 <?php esc_html_e('Enjoying Login AWP? Please take a moment to rate us! ⭐⭐⭐⭐⭐', 'login-awp'); ?>
@@ -321,10 +322,15 @@ class AdminRegister
             </p>
         </div>
         <style>
-            .login-awp-review-notice p { margin-bottom: 10px; }
-            .login-awp-review-notice .button { margin-right: 5px; }
+            .login-awp-review-notice p {
+                margin-bottom: 10px;
+            }
+
+            .login-awp-review-notice .button {
+                margin-right: 5px;
+            }
         </style>
-        <?php
+<?php
     }
 
     /**
@@ -346,7 +352,7 @@ class AdminRegister
         }
 
         // Update the option to permanently dismiss the notice
-        update_option('login_awp_review_notice_dismissed', '1');
+        update_option(self::$reviewNoticeDismissedOption, '1');
 
         // Redirect back to the previous page
         wp_safe_redirect(wp_get_referer() ? wp_get_referer() : admin_url());

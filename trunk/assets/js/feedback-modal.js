@@ -14,7 +14,7 @@
         // Set up for deactivation link
         setupDeactivationFeedback();
         
-        // Set up delegation for delete link which might be added dynamically
+        // Set up delegation for delete links (which may be added dynamically)
         setupDeletionFeedback();
         
         /**
@@ -36,24 +36,45 @@
         }
         
         /**
-         * Set up feedback for deletion using event delegation
+         * Set up feedback for deletion using multiple methods to ensure we catch all deletion scenarios
          * This is necessary because delete links are often added dynamically after plugin deactivation
          */
         function setupDeletionFeedback() {
-            // Use event delegation to capture any delete links that may be added dynamically
-            $(document).on('click', 'tr[data-slug="' + baseSlug + '"] .delete a, a[href*="action=delete-selected"][href*="' + baseSlug + '"]', function(e) {
+            // Method 1: Direct plugin row delete link
+            $(document).on('click', 'tr[data-slug="' + baseSlug + '"] .delete a', function(e) {
                 e.preventDefault();
-                const deleteUrl = $(this).attr('href');
-                showModal(deleteUrl, 'delete');
+                showModal($(this).attr('href'), 'delete');
             });
             
-            // Also capture deletion via the bulk actions dropdown
+            // Method 2: Listen for any delete link that contains our plugin slug
+            $(document).on('click', 'a[href*="plugins.php"][href*="action=delete-selected"][href*="' + baseSlug + '"]', function(e) {
+                e.preventDefault();
+                showModal($(this).attr('href'), 'delete');
+            });
+            
+            // Method 3: Plugin actions row (where delete appears after deactivation)
+            $(document).on('click', '.row-actions .delete a[href*="' + baseSlug + '"]', function(e) {
+                e.preventDefault();
+                showModal($(this).attr('href'), 'delete');
+            });
+            
+            // Method 4: Capture "Delete" confirmation in plugins.php page
+            $(document).on('click', '.plugins-php #submit[value="Yes, Delete these files"]', function(e) {
+                // Check if our plugin is being deleted
+                if (window.location.href.indexOf(baseSlug) !== -1 || 
+                    $('input[name="checked[]"][value*="' + baseSlug + '"]').length) {
+                    e.preventDefault();
+                    showModal(window.location.href, 'delete');
+                }
+            });
+            
+            // Method 5: Bulk actions dropdown
             $('#bulk-action-form').on('submit', function(e) {
                 const action = $('#bulk-action-selector-top, #bulk-action-selector-bottom').val();
                 
                 if (action === 'delete') {
                     // Check if our plugin is selected
-                    const isPluginSelected = $('input[name="checked[]"][value="' + pluginSlug + '"]:checked').length > 0;
+                    const isPluginSelected = $('input[name="checked[]"][value*="' + baseSlug + '"]:checked').length > 0;
                     
                     if (isPluginSelected) {
                         e.preventDefault();
@@ -61,6 +82,16 @@
                     }
                 }
             });
+            
+            // Method 6: Override confirm dialog for delete
+            const originalConfirm = window.confirm;
+            window.confirm = function(message) {
+                if (message.indexOf('delete') !== -1 && window.location.href.indexOf(baseSlug) !== -1) {
+                    showModal(window.location.href, 'delete');
+                    return false;
+                }
+                return originalConfirm.apply(this, arguments);
+            };
         }
 
         /**

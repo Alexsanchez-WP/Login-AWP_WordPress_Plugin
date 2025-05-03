@@ -5,18 +5,45 @@
  *
  * @author AWP-Software
  * @since 2.0.0
- * @version 2.0.0
+ * @version 3.1.0
  */
 
-if (!defined(constant_name: 'WP_UNINSTALL_PLUGIN')) {
+if (!defined('WP_UNINSTALL_PLUGIN')) {
     die('You are not allowed to uninstall the plugin');
 }
 
 require_once __DIR__ . '/vendor/autoload.php';
 
 use Login\Awp\Admin\AdminRegister;
+use Login\Awp\Admin\FeedbackManager;
+use Login\Awp\Admin\ThemeManager;
 
-delete_option(option: AdminRegister::$imgLogoName);
-delete_option(option: AdminRegister::$imgBackName);
-delete_site_option(option: AdminRegister::$imgLogoName);
-delete_site_option(option: AdminRegister::$imgBackName);
+// Delete plugin settings
+delete_option(AdminRegister::$imgLogoName);
+delete_option(AdminRegister::$imgBackName);
+delete_option(AdminRegister::$activateDateOption);
+delete_option(AdminRegister::$reviewNoticeDismissedOption);
+
+delete_site_option(AdminRegister::$imgLogoName);
+delete_site_option(AdminRegister::$imgBackName);
+delete_site_option(AdminRegister::$activateDateOption);
+delete_site_option(AdminRegister::$reviewNoticeDismissedOption);
+
+// Delete feedback settings
+delete_option(FeedbackManager::$activateDateOption);
+delete_option(FeedbackManager::$reviewNoticeDismissedOption);
+delete_option(FeedbackManager::$feedbackEmailOption);
+delete_option(FeedbackManager::$feedbackWebhookOption);
+
+delete_site_option(FeedbackManager::$activateDateOption);
+delete_site_option(FeedbackManager::$reviewNoticeDismissedOption);
+delete_site_option(FeedbackManager::$feedbackEmailOption);
+delete_site_option(FeedbackManager::$feedbackWebhookOption);
+
+// Delete custom theme settings
+delete_option(ThemeManager::$themeOptionName);
+delete_option(ThemeManager::$customStylesOptionName);
+
+delete_site_option(ThemeManager::$themeOptionName);
+delete_site_option(ThemeManager::$customStylesOptionName);
+
