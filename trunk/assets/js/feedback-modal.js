@@ -125,10 +125,14 @@
         function submitFeedback() {
             const form = $('#login-awp-feedback-form');
             const actionUrl = form.data('actionUrl');
-            const reason = form.find('input[name="reason"]:checked').val();
+            let reason = form.find('input[name="reason"]:checked').val();
+            const includeEmail = form.find('input[name="include_email"]').is(':checked');
             
-            // If no reason selected, just proceed with action
-            if (!reason) {
+            // If no reason selected but email is included, set default reason to "no context"
+            if (!reason && includeEmail) {
+                reason = 'no context';
+            } else if (!reason) {
+                // If no reason selected and no email, just proceed with action
                 window.location.href = actionUrl;
                 return;
             }
@@ -163,7 +167,7 @@
             }
 
             // Include email if checkbox is checked
-            if (form.find('input[name="include_email"]').is(':checked')) {
+            if (includeEmail) {
                 data.include_email = '1';
             }
 

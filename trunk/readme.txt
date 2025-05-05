@@ -1,16 +1,16 @@
 === Login AWP ===
 Contributors: alexanderwp
 Donate link: https://www.paypal.com/donate/?hosted_button_id=32A55GWU7JKY4
-Tags: login, custom login, login page, login branding, style builder, admin branding
+Tags: login, custom login, login page, login branding, style builder
 Requires at least: 5.4
 Tested up to: 6.8
-Stable tag: 3.2.0
+Stable tag: 3.2.1
 Requires PHP: 7.4
 Support link: https://awp-software.com/docs-category/login-awp-plugin/
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-Login AWP allows you to fully customize the WordPress login screen with themes, logos, background images, and a visual style builder — no coding required.
+Customize your WordPress login page with themes, logos, and styles. Fast, lightweight, and built for a polished first impression.
 
 == Description ==
 
@@ -22,7 +22,7 @@ Login AWP allows you to fully customize the WordPress login screen with themes, 
 - Customize colors, fonts, borders, and spacing using the visual Style Builder
 - Fully responsive and retina-ready design
 - Seamless integration under the WordPress "Appearance" menu
-- Lightweight, fast, and compatible with multisite
+- Lightweight and fast
 - Translation-ready (includes Spanish)
 - User-friendly feedback system for continuous improvement
 - Plugin deactivation feedback to help us improve
@@ -110,7 +110,4 @@ In version 3.2.0, we've fixed an issue that could cause AJAX errors when submitt
 == Upgrade Notice ==
 
 = 3.2.0 =
-This update removes the deletion feedback functionality while keeping the deactivation feedback system. We've also fixed an important issue with the feedback system when deactivating the plugin. The previous version could generate AJAX errors during feedback submission, which has been resolved. We recommend all users update to this version.
-
-= 3.1.0 =
-This update adds a user feedback system for administrators and when deactivating the plugin. We've also fixed a JavaScript loading issue and improved compatibility with older PHP versions. We recommend all users update for a better experience.
+This update includes all improvements and fixes from version 3.1.0 and resolves an important issue with the feedback system when deactivating the plugin. The previous version could generate AJAX errors during feedback submission, which has been fixed. Additionally, this version enhances error handling for feedback submissions and improves data sanitization. We recommend all users update to this version.

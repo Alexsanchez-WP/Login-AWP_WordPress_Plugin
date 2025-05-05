@@ -62,7 +62,6 @@ class Register
         $admin = new AdminRegister(dir_url: $this->dirUrl);
         $admin->load();
         
-        // Initialize the feedback manager
         $feedback = new FeedbackManager(dir_url: $this->dirUrl);
         $feedback->load();
     }

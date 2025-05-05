@@ -8,4 +8,6 @@ LICENSE.md
 README.md
 composer.json
 tests
+docs
+TODO.md
 *composer.lock" .
