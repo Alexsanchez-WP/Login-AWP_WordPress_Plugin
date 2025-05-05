@@ -74,7 +74,6 @@ In version 3.2.0, we've fixed an issue that could cause AJAX errors when submitt
 == Changelog ==
 
 = 3.2.0 =
-* REMOVED: Deletion feedback functionality
 * FIXED: Resolved AJAX error during plugin deactivation feedback submission
 * FIXED: Corrected issue with feedback submission pointing to incorrect domain
 * IMPROVED: Enhanced error handling for feedback email and webhook submissions
