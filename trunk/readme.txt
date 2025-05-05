@@ -1,82 +1,113 @@
 === Login AWP ===
 Contributors: alexanderwp
 Donate link: https://www.paypal.com/donate/?hosted_button_id=32A55GWU7JKY4
-Tags: login, customize, custom login
+Tags: login, custom login, login page, login branding, style builder
 Requires at least: 5.4
 Tested up to: 6.8
-Stable tag: 3.0.0
+Stable tag: 3.2.1
 Requires PHP: 7.4
+Support link: https://awp-software.com/docs-category/login-awp-plugin/
 License: GPLv3 or later
-License URI: https://www.gnu.org/licenses/gpl-3.0.html 
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-This plugin improves the login look for the website and defaults to the page logo.
+Customize your WordPress login page with themes, logos, and styles. Fast, lightweight, and built for a polished first impression.
 
 == Description ==
 
-This plugin improves the login look for the website and defaults to the page logo
+**Login AWP** enhances the default WordPress login page with powerful customization features:
 
-* Add a background image with transitions
-* Put the main logo of the website
-* Responsive
-* Just activating it already adds personality to the login
-* Choose from pre-designed themes to instantly transform your login page
-* Create your own custom theme with the Style Builder
+- Add a custom background image with transitions
+- Display your website's logo automatically
+- Choose from pre-designed login themes
+- Customize colors, fonts, borders, and spacing using the visual Style Builder
+- Fully responsive and retina-ready design
+- Seamless integration under the WordPress "Appearance" menu
+- Lightweight and fast
+- Translation-ready (includes Spanish)
+- User-friendly feedback system for continuous improvement
+- Plugin deactivation feedback to help us improve
+
+Whether you manage a client site, a brand, or a community platform, Login AWP lets you deliver a professional first impression — effortlessly.
+
+== Installation ==
+
+1. Upload the plugin files to the `/wp-content/plugins/login-awp/` directory, or install the plugin through the WordPress Plugin Directory.
+2. Activate the plugin through the "Plugins" menu.
+3. Navigate to **Appearance → Login AWP** to start customizing your login screen.
 
 == Frequently Asked Questions ==
 
-= Can I change the background image? =
+= Can I change the background image? =  
+Yes. Go to **Appearance → Login AWP**, then select the "Background" tab to upload your image.
 
-Yes, now you can do it from the "log in" option in the appearance menu.
+= What happens if I don't set a logo? =  
+WordPress will use the default logo. You can upload a custom logo from the plugin settings.
 
-= What happens if I don't have a logo? =
+= My background image is slow to load. What should I do? =  
+Use optimized images under 500KB in JPG or WEBP format for better performance.
 
-The WordPress logo will be displayed by default.
-You can also customize your logo from the "log in" option in the appearance menu.
+= How do I apply a pre-designed theme? =  
+In the plugin settings, navigate to the "Themes" tab. Click a theme to preview and activate it.
 
-= I changed the background image but it takes a while to load =
+= Can I fully customize styles? =  
+Yes! Use the "Style Builder" tab to visually change colors, fonts, borders, spacing, and more.
 
-Try reducing the image size or restoring the plugin to its initial version.
+= How can I provide feedback about this plugin? =
+After using the plugin for a short period, administrators will see a feedback notification where they can leave a review. You can also provide feedback when deactivating the plugin. This helps us improve Login AWP.
 
-= How do I apply a pre-designed theme? =
+= The login page isn't loading my custom styles. What should I do? =
+Ensure your browser's cache is cleared. If the issue persists, try disabling other plugins that might conflict with login page customizations.
 
-Go to the "Login" option in the appearance menu, and navigate to the "Themes" tab. Click on the theme you want to apply and save your changes.
-
-= Can I customize the colors and styles of my login page? =
-
-Yes, use the Style Builder feature to customize colors, fonts, borders, and more. Go to the "Login" option in the appearance menu and select the "Style Builder" tab.
+= I'm getting an error when trying to send feedback while deactivating the plugin. What should I do? =
+In version 3.2.0, we've fixed an issue that could cause AJAX errors when submitting feedback. Make sure you're using the latest version of the plugin. If the issue persists, you can safely skip the feedback step.
 
 == Screenshots ==
 
-1. Login with default logo.
-2. Login wiht custom logo.
-3. Menu location.
-4. Image upload example.
-5. Theme selection interface.
-6. Style Builder customization panel.
+1. Login page with default WordPress logo.
+2. Login page with custom logo.
+3. Plugin location in the Appearance menu.
+4. Background image upload interface.
+5. Pre-designed theme selector.
+6. Style Builder customization interface.
+7. Feedback modal when deactivating the plugin.
 
 == Changelog ==
 
-= 1.0.0 =
-* First stable version
+= 3.2.0 =
+* FIXED: Resolved AJAX error during plugin deactivation feedback submission
+* FIXED: Corrected issue with feedback submission pointing to incorrect domain
+* IMPROVED: Enhanced error handling for feedback email and webhook submissions
+* IMPROVED: Better fallbacks for email delivery when feedback settings are incomplete
+* SECURITY: Improved data sanitization for feedback submissions
 
-= 1.1.0 =
-* Fix: 
-    - Site icon loads to show on login when custom icon exists
-
-= 2.0.0 =
-* Features: 
-    - The admin area is added to the appearance menu.
-    - You can update the login logo and background.
-
-= 2.1.0 =
-* Features: 
-    - Messages about the status of image updates are added.
-    - Spanish translation added.
+= 3.1.0 =
+* NEW: Added user feedback system for administrators to help improve the plugin
+* NEW: Added deactivation feedback modal to collect improvement suggestions
+* FIXED: Login page JavaScript loading issue on specific server configurations
+* IMPROVED: Enhanced compatibility with older PHP versions
+* IMPROVED: Better handling of modal dialogs with event delegation
+* FIXED: Various minor styling issues 
 
 = 3.0.0 =
-* Features:
-    - Theme selection system with pre-designed themes.
-    - Style Builder for complete customization of login page appearance.
-    - Advanced color controls for backgrounds, text, and form elements.
-    - Font customization options.
-    - Border and spacing controls.
+* NEW: Theme selection system with pre-designed layouts
+* NEW: Visual Style Builder for advanced customization
+* NEW: Custom fonts, colors, spacing, and border settings
+
+= 2.1.0 =
+* NEW: Status notifications for image updates
+* Added: Spanish language translation
+
+= 2.0.0 =
+* NEW: Plugin moved to Appearance menu for easier access
+* NEW: Logo and background image customization
+
+= 1.1.0 =
+* FIX: Automatically display custom site icon on login page if available
+
+= 1.0.0 =
+* Initial stable release
+
+== Upgrade Notice ==
+
+= 3.2.0 =
+This update includes all improvements and fixes from version 3.1.0 and resolves an important issue with the feedback system when deactivating the plugin. The previous version could generate AJAX errors during feedback submission, which has been fixed. Additionally, this version enhances error handling for feedback submissions and improves data sanitization. We recommend all users update to this version.

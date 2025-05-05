@@ -13,6 +13,7 @@ namespace Login\Awp;
 
 use Login\Awp\Public\PublicRegister;
 use Login\Awp\Admin\AdminRegister;
+use Login\Awp\Admin\FeedbackManager;
 
 class Register
 {
@@ -21,7 +22,7 @@ class Register
     public string $domainPath;
 
     /**
-     * Summary of __construct
+     * __construct
      *
      * @param string $dir_url
      * @param string $dir_path
@@ -38,19 +39,16 @@ class Register
     {
         // Registrar primero la carga del textdomain
         add_action('plugins_loaded', array($this, 'initPlugin'));
+
     }
 
     /**
      * Inicializa el plugin después de cargar las traducciones
      */
     public function initPlugin(): void
-    {
-        $this->initComponents();
-
-        // Primero cargar las traducciones
+    {        
         $this->loginAwpTextdomain();
-        
-        // Luego inicializar los componentes del plugin
+        $this->initComponents();
     }
     
     /**
@@ -63,6 +61,9 @@ class Register
 
         $admin = new AdminRegister(dir_url: $this->dirUrl);
         $admin->load();
+        
+        $feedback = new FeedbackManager(dir_url: $this->dirUrl);
+        $feedback->load();
     }
 
     public function loginAwpTextdomain(): void
