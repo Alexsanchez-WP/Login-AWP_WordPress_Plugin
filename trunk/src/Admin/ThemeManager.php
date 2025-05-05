@@ -15,17 +15,17 @@ namespace Login\Awp\Admin;
 
 class ThemeManager
 {
-    public string $dirUrl;
-    public static string $themeOptionName = 'login_awp_selected_theme';
-    public static string $customStylesOptionName = 'login_awp_custom_styles';
-    private array $predefinedThemes = [];
+    public $dirUrl;
+    public static $themeOptionName = 'login_awp_selected_theme';
+    public static $customStylesOptionName = 'login_awp_custom_styles';
+    private $predefinedThemes = [];
 
     /**
      * Constructor
      *
      * @param string $dir_url Plugin directory URL
      */
-    public function __construct(string $dir_url)
+    public function __construct($dir_url)
     {
         $this->dirUrl = $dir_url . 'assets/';
     }
@@ -33,22 +33,22 @@ class ThemeManager
     /**
      * Initialize the theme manager
      */
-    public function load(): void
+    public function load()
     {
         // Registrar eventos después de que WordPress esté completamente cargado
         add_action('admin_enqueue_scripts', array($this, 'enqueueAdminAssets'));
         add_action('wp_ajax_login_awp_preview_theme', array($this, 'ajaxPreviewTheme'));
         add_action('wp_ajax_login_awp_save_theme', array($this, 'ajaxSaveTheme'));
-        
+
         // Inicializar los temas predefinidos
         add_action('init', array($this, 'initializePredefinedThemes'));
     }
-    
+
     /**
      * Inicializa los temas predefinidos una vez que WordPress está completamente cargado
      * y las traducciones están disponibles
      */
-    public function initializePredefinedThemes(): void
+    public function initializePredefinedThemes()
     {
         $this->predefinedThemes = $this->registerPredefinedThemes();
     }
@@ -58,7 +58,7 @@ class ThemeManager
      *
      * @return array Array of predefined themes
      */
-    private function registerPredefinedThemes(): array
+    private function registerPredefinedThemes()
     {
         return [
             'default' => [
@@ -174,13 +174,13 @@ class ThemeManager
      *
      * @return array List of available themes
      */
-    public function getThemes(): array
+    public function getThemes()
     {
         // Si los temas aún no están inicializados, inicializarlos aquí
         if (empty($this->predefinedThemes)) {
             $this->predefinedThemes = $this->registerPredefinedThemes();
         }
-        
+
         return $this->predefinedThemes;
     }
 
@@ -189,16 +189,16 @@ class ThemeManager
      *
      * @return string Theme key
      */
-    public function getSelectedTheme(): string
+    public function getSelectedTheme()
     {
         // Si los temas aún no están inicializados, inicializarlos aquí
         if (empty($this->predefinedThemes)) {
             $this->predefinedThemes = $this->registerPredefinedThemes();
         }
-        
+
         $selectedTheme = get_option(self::$themeOptionName);
-        return $selectedTheme && isset($this->predefinedThemes[$selectedTheme]) 
-            ? $selectedTheme 
+        return $selectedTheme && isset($this->predefinedThemes[$selectedTheme])
+            ? $selectedTheme
             : 'default';
     }
 
@@ -208,25 +208,25 @@ class ThemeManager
      * @param string $theme_key Theme identifier
      * @return array|null Theme configuration or null if not found
      */
-    public function getThemeConfig(string $theme_key): ?array
+    public function getThemeConfig($theme_key)
     {
         // Si los temas aún no están inicializarlos, inicializarlos aquí
         if (empty($this->predefinedThemes)) {
             $this->predefinedThemes = $this->registerPredefinedThemes();
         }
-        
-        return isset($this->predefinedThemes[$theme_key]) 
-            ? $this->predefinedThemes[$theme_key] 
+
+        return isset($this->predefinedThemes[$theme_key])
+            ? $this->predefinedThemes[$theme_key]
             : null;
     }
 
     /**
      * Enqueue admin assets for theme management
      */
-    public function enqueueAdminAssets(): void
+    public function enqueueAdminAssets()
     {
         $screen = get_current_screen();
-        
+
         // Only load on our plugin page
         if ($screen && $screen->id === 'appearance_page_login-awp') {
             wp_enqueue_style(
@@ -235,7 +235,7 @@ class ThemeManager
                 array(),
                 '3.0.0'
             );
-            
+
             wp_enqueue_script(
                 'login-awp-theme-preview',
                 $this->dirUrl . 'js/themePreview.js',
@@ -243,25 +243,25 @@ class ThemeManager
                 '3.0.0',
                 true
             );
-            
+
             // Get current logo and background images using the correct option names
             $logo_img = get_option('login_awp_logo_url', '');
             $background_img = get_option('login_awp_background_url', '');
-            
+
             // Default background if not set
             if (empty($background_img)) {
                 $background_img = $this->dirUrl . 'img/slider.jpg';
             }
-            
+
             // Default logo uses site icon if available
             if (empty($logo_img)) {
                 $logo_img = get_site_icon_url();
             }
-            
+
             // Verificar si existen estilos personalizados
             $custom_styles = get_option(self::$customStylesOptionName, '');
             $has_custom_styles = !empty($custom_styles);
-            
+
             wp_localize_script(
                 'login-awp-theme-preview',
                 'loginAwpThemes',
@@ -284,66 +284,66 @@ class ThemeManager
     /**
      * AJAX handler for theme preview
      */
-    public function ajaxPreviewTheme(): void
+    public function ajaxPreviewTheme()
     {
         // Check permissions and nonce
         if (!current_user_can('manage_options')) {
             wp_send_json_error(array('message' => __('You do not have sufficient permissions', 'login-awp')));
             return;
         }
-        
+
         if (!check_ajax_referer('login_awp_theme_preview', 'nonce', false)) {
             wp_send_json_error(array('message' => __('Invalid security token', 'login-awp')));
             return;
         }
-        
+
         // Si los temas aún no están inicializados, inicializarlos aquí
         if (empty($this->predefinedThemes)) {
             $this->predefinedThemes = $this->registerPredefinedThemes();
         }
-        
+
         $theme_key = isset($_POST['theme']) ? sanitize_text_field($_POST['theme']) : '';
         $theme_config = $this->getThemeConfig($theme_key);
-        
+
         if ($theme_config) {
             wp_send_json_success(array('config' => $theme_config));
         } else {
             wp_send_json_error(array('message' => __('Theme not found', 'login-awp')));
         }
-        
+
         wp_die();
     }
 
     /**
      * AJAX handler for saving theme
      */
-    public function ajaxSaveTheme(): void
+    public function ajaxSaveTheme()
     {
         // Check permissions and nonce
         if (!current_user_can('manage_options')) {
             wp_send_json_error(array('message' => __('You do not have sufficient permissions', 'login-awp')));
             return;
         }
-        
+
         if (!check_ajax_referer('login_awp_theme_preview', 'nonce', false)) {
             wp_send_json_error(array('message' => __('Invalid security token', 'login-awp')));
             return;
         }
-        
+
         // Si los temas aún no están inicializados, inicializarlos aquí
         if (empty($this->predefinedThemes)) {
             $this->predefinedThemes = $this->registerPredefinedThemes();
         }
-        
+
         $theme_key = isset($_POST['theme']) ? sanitize_text_field($_POST['theme']) : '';
-        
+
         if (isset($this->predefinedThemes[$theme_key])) {
             update_option(self::$themeOptionName, $theme_key);
             wp_send_json_success(array('message' => __('Theme saved successfully', 'login-awp')));
         } else {
             wp_send_json_error(array('message' => __('Invalid theme selected', 'login-awp')));
         }
-        
+
         wp_die();
     }
 
@@ -352,61 +352,61 @@ class ThemeManager
      *
      * @return string Generated CSS
      */
-    public function generateThemeCSS(): string
+    public function generateThemeCSS()
     {
         $theme_key = $this->getSelectedTheme();
-        
+
         // Si los temas aún no están inicializados, inicializarlos aquí
         if (empty($this->predefinedThemes)) {
             $this->predefinedThemes = $this->registerPredefinedThemes();
         }
-        
+
         $theme = $this->getThemeConfig($theme_key);
-        
+
         if (!$theme) {
             return '';
         }
-        
+
         $custom_styles = get_option(self::$customStylesOptionName, '');
-        
+
         // If we have custom styles, use those instead
         if (!empty($custom_styles)) {
             return $custom_styles;
         }
-        
+
         // Otherwise generate CSS from theme config
         ob_start();
-        ?>
-body.login {
-    background-color: <?php echo esc_attr($theme['colors']['bg']); ?>;
-    font-family: <?php echo esc_attr($theme['typography']['font_family']); ?>;
-    font-size: <?php echo esc_attr($theme['typography']['font_size']); ?>;
-}
+?>
+        body.login {
+        background-color: <?php echo esc_attr($theme['colors']['bg']); ?>;
+        font-family: <?php echo esc_attr($theme['typography']['font_family']); ?>;
+        font-size: <?php echo esc_attr($theme['typography']['font_size']); ?>;
+        }
 
-body.login div#login {
-    background-color: <?php echo esc_attr($theme['colors']['container_bg']); ?>;
-    border-radius: <?php echo esc_attr($theme['effects']['border_radius']); ?>;
-    box-shadow: <?php echo esc_attr($theme['effects']['box_shadow']); ?>;
-}
+        body.login div#login {
+        background-color: <?php echo esc_attr($theme['colors']['container_bg']); ?>;
+        border-radius: <?php echo esc_attr($theme['effects']['border_radius']); ?>;
+        box-shadow: <?php echo esc_attr($theme['effects']['box_shadow']); ?>;
+        }
 
-body.login div#login form#loginform p,
-body.login div#login form#loginform p label {
-    color: <?php echo esc_attr($theme['colors']['text']); ?>;
-}
+        body.login div#login form#loginform p,
+        body.login div#login form#loginform p label {
+        color: <?php echo esc_attr($theme['colors']['text']); ?>;
+        }
 
-body.login div#login form#loginform p.submit input#wp-submit {
-    background-color: <?php echo esc_attr($theme['colors']['button_bg']); ?>;
-}
+        body.login div#login form#loginform p.submit input#wp-submit {
+        background-color: <?php echo esc_attr($theme['colors']['button_bg']); ?>;
+        }
 
-body.login div#login form#loginform p.submit input#wp-submit:hover {
-    background-color: <?php echo esc_attr($theme['colors']['button_hover']); ?>;
-}
+        body.login div#login form#loginform p.submit input#wp-submit:hover {
+        background-color: <?php echo esc_attr($theme['colors']['button_hover']); ?>;
+        }
 
-body.login div#login p#nav a, 
-body.login div#login p#backtoblog a {
-    color: <?php echo esc_attr($theme['colors']['links']); ?>;
-}
-        <?php
+        body.login div#login p#nav a,
+        body.login div#login p#backtoblog a {
+        color: <?php echo esc_attr($theme['colors']['links']); ?>;
+        }
+<?php
         return ob_get_clean();
     }
 }

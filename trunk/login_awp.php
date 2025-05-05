@@ -6,7 +6,7 @@ declare(strict_types=1);
  * Plugin Name: Login AWP
  * Plugin URI: https://wordpress.org/plugins/login-awp
  * Description: This plugin modifies the login area for WordPress admin
- * Version: 3.0.0
+ * Version: 3.2.1
  * Requires at least: 5.4
  * Requires PHP: 7.4
  * Author: AWP-Software
@@ -18,12 +18,21 @@ declare(strict_types=1);
  * https://www.gnu.org/licenses/gpl-3.0.html
  */
 
-
-if (!defined(constant_name: 'ABSPATH')) {
+if (!defined('ABSPATH')) {
     die('You are not allowed to call this page directly.');
 }
 
+// Define plugin constants (previously in settings.php)
+if (!defined('AWP_LOGIN_FEEDBACK_EMAIL')) {
+    define('AWP_LOGIN_FEEDBACK_EMAIL', 'support@awp-software.com');
+}
+
+if (!defined('AWP_LOGIN_FEEDBACK_WEBHOOK')) {
+    define('AWP_LOGIN_FEEDBACK_WEBHOOK', 'https://telemetry.awp-software.com/feedback');
+}
+
 require_once __DIR__ . '/vendor/autoload.php';
+// settings.php is now integrated directly in this file
 
 use Login\Awp\Register;
 
