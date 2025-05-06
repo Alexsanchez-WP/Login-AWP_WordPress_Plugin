@@ -6,6 +6,7 @@ svn propset svn:ignore ".dockerignore
 .svnignore
 LICENSE.md
 README.md
+CHANGELOG.md
 composer.json
 tests
 docs

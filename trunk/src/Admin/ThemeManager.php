@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @package Login\Awp\Admin
  * @author AWP-Software
  * @since 3.0.0
- * @version 3.0.0
+ * @version 3.2.1
  */
 
 namespace Login\Awp\Admin;
@@ -16,8 +16,8 @@ namespace Login\Awp\Admin;
 class ThemeManager
 {
     public $dirUrl;
-    public static $themeOptionName = 'login_awp_selected_theme';
-    public static $customStylesOptionName = 'login_awp_custom_styles';
+    public static $themeOptionName = AWP_LOGIN_THEME_OPTION;
+    public static $customStylesOptionName = AWP_LOGIN_CUSTOM_STYLES_OPTION;
     private $predefinedThemes = [];
 
     /**
@@ -238,15 +238,15 @@ class ThemeManager
 
             wp_enqueue_script(
                 'login-awp-theme-preview',
-                $this->dirUrl . 'js/themePreview.js',
+                $this->dirUrl . 'js/theme-preview.js',
                 array('jquery'),
                 '3.0.0',
                 true
             );
 
             // Get current logo and background images using the correct option names
-            $logo_img = get_option('login_awp_logo_url', '');
-            $background_img = get_option('login_awp_background_url', '');
+            $logo_img = get_option(AWP_LOGIN_LOGO_OPTION, '');
+            $background_img = get_option(AWP_LOGIN_BACKGROUND_OPTION, '');
 
             // Default background if not set
             if (empty($background_img)) {

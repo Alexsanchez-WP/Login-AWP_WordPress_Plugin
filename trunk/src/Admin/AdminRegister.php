@@ -7,7 +7,7 @@ declare(strict_types=1);
  *
  * @author AWP-Software
  * @since 2.0.0
- * @version 3.0.0
+ * @version 3.2.1
  */
 
 namespace Login\Awp\Admin;
@@ -16,10 +16,11 @@ class AdminRegister
 {
     public $dirUrl;
 
-    public static $imgLogoName = 'login_awp_logo_url';
-    public static $imgBackName = 'login_awp_background_url';
-    public static $activateDateOption = 'login_awp_activation_date';
-    public static $reviewNoticeDismissedOption = 'login_awp_review_notice_dismissed';
+    // Propiedades estáticas que ahora referencian a las constantes del archivo settings.php
+    public static $imgLogoName = AWP_LOGIN_LOGO_OPTION;
+    public static $imgBackName = AWP_LOGIN_BACKGROUND_OPTION;
+    public static $activateDateOption = AWP_LOGIN_ACTIVATION_DATE_OPTION;
+    public static $reviewNoticeDismissedOption = AWP_LOGIN_REVIEW_DISMISSED_OPTION;
     private $adminTemplate = 'templates/menu_admin.php';
     private $messageTemplate = 'templates/status_message.php';
     private $themeManager;
@@ -101,7 +102,7 @@ class AdminRegister
     {
         wp_enqueue_style(
             'loginAdminCSS',
-            $this->dirUrl . 'css/loginAdminStyles.css',
+            $this->dirUrl . 'css/login-admin-styles.css',
             array(),
             '3.0.0'
         );
@@ -113,7 +114,7 @@ class AdminRegister
         wp_enqueue_script('jquery');
         wp_enqueue_script(
             'loginAdminScript',
-            $this->dirUrl . 'js/loginAdmin.js',
+            $this->dirUrl . 'js/login-admin.js',
             array('jquery'),
             '3.0.0',
             true

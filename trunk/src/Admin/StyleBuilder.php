@@ -90,7 +90,7 @@ class StyleBuilder
             
             wp_enqueue_script(
                 'login-awp-style-builder',
-                $this->dirUrl . 'js/styleBuilder.js',
+                $this->dirUrl . 'js/style-builder.js',
                 array('jquery', 'jquery-ui-core', 'wp-color-picker', 'jquery-ui-slider'),
                 '3.0.0',
                 true
@@ -106,8 +106,8 @@ class StyleBuilder
             );
             
             // Get current logo and background images using the correct option names
-            $logo_img = get_option('login_awp_logo_url', '');
-            $background_img = get_option('login_awp_background_url', '');
+            $logo_img = get_option(AWP_LOGIN_LOGO_OPTION, '');
+            $background_img = get_option(AWP_LOGIN_BACKGROUND_OPTION, '');
             
             // Default background if not set
             if (empty($background_img)) {

@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/donate/?hosted_button_id=32A55GWU7JKY4
 Tags: login, custom login, login page, login branding, style builder
 Requires at least: 5.4
 Tested up to: 6.8
-Stable tag: 3.2.1
+Stable tag: 3.2.2
 Requires PHP: 7.4
 Support link: https://awp-software.com/docs-category/login-awp-plugin/
 License: GPLv3 or later
@@ -73,6 +73,12 @@ In version 3.2.0, we've fixed an issue that could cause AJAX errors when submitt
 
 == Changelog ==
 
+= 3.2.2 =
+* FIXED: Resolved additional edge case with deactivation feedback system
+* IMPROVED: Enhanced plugin initialization for better reliability
+* IMPROVED: Optimized performance for faster page loading
+* IMPROVED: Reduced plugin resource usage across all pages
+
 = 3.2.0 =
 * FIXED: Resolved AJAX error during plugin deactivation feedback submission
 * FIXED: Corrected issue with feedback submission pointing to incorrect domain
@@ -109,5 +115,5 @@ In version 3.2.0, we've fixed an issue that could cause AJAX errors when submitt
 
 == Upgrade Notice ==
 
-= 3.2.0 =
-This update includes all improvements and fixes from version 3.1.0 and resolves an important issue with the feedback system when deactivating the plugin. The previous version could generate AJAX errors during feedback submission, which has been fixed. Additionally, this version enhances error handling for feedback submissions and improves data sanitization. We recommend all users update to this version.
+= 3.2.2 =
+This update fixes remaining issues with the deactivation feedback system and improves overall plugin performance. We've optimized resource usage to make your site faster and more responsive. Update recommended for all users.

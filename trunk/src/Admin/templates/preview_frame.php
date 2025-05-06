@@ -13,8 +13,8 @@ if (!defined('ABSPATH')) {
 }
 
 // Get current logo and background images using the correct option names
-$logo_img = get_option('login_awp_logo_url');
-$background_img = get_option('login_awp_background_url');
+$logo_img = get_option(AWP_LOGIN_LOGO_OPTION);
+$background_img = get_option(AWP_LOGIN_BACKGROUND_OPTION);
 
 // Default background if not set
 if (empty($background_img)) {

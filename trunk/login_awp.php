@@ -6,7 +6,7 @@ declare(strict_types=1);
  * Plugin Name: Login AWP
  * Plugin URI: https://wordpress.org/plugins/login-awp
  * Description: This plugin modifies the login area for WordPress admin
- * Version: 3.2.1
+ * Version: 3.2.2
  * Requires at least: 5.4
  * Requires PHP: 7.4
  * Author: AWP-Software
@@ -22,19 +22,24 @@ if (!defined('ABSPATH')) {
     die('You are not allowed to call this page directly.');
 }
 
-// Define plugin constants (previously in settings.php)
-if (!defined('AWP_LOGIN_FEEDBACK_EMAIL')) {
-    define('AWP_LOGIN_FEEDBACK_EMAIL', 'support@awp-software.com');
-}
-
-if (!defined('AWP_LOGIN_FEEDBACK_WEBHOOK')) {
-    define('AWP_LOGIN_FEEDBACK_WEBHOOK', 'https://telemetry.awp-software.com/feedback');
-}
 
 require_once __DIR__ . '/vendor/autoload.php';
-// settings.php is now integrated directly in this file
+require_once __DIR__ . '/settings.php';
+
 
 use Login\Awp\Register;
+
+register_activation_hook(__FILE__, 'login_awp_activate');
+
+function login_awp_activate() {
+
+    add_option(AWP_LOGIN_ACTIVATION_DATE_OPTION, time());
+    add_option(AWP_LOGIN_REVIEW_DISMISSED_OPTION, '0');
+    add_option(AWP_LOGIN_FEEDBACK_EMAIL_OPTION, AWP_LOGIN_FEEDBACK_EMAIL);
+    add_option(AWP_LOGIN_FEEDBACK_WEBHOOK_OPTION, AWP_LOGIN_FEEDBACK_WEBHOOK);
+    
+    flush_rewrite_rules();
+}
 
 $register = new Register(
     plugin_dir_url(__FILE__),

@@ -7,7 +7,7 @@ declare(strict_types=1);
  *
  * @author AWP-Software
  * @since 2.0.0
- * @version 3.0.0
+ * @version 3.2.1
  */
 
 namespace Login\Awp\Public;
@@ -61,7 +61,7 @@ class PublicRegister
         );
         wp_enqueue_style(
             'loginCSS',
-            $this->dirUrl . 'css/loginStyles.css',
+            $this->dirUrl . 'css/login-styles.css',
             array(),
             false
         );
@@ -79,7 +79,7 @@ class PublicRegister
         );
         wp_enqueue_script(
             'loginJs',
-            $this->dirUrl . 'js/loginJs.js',
+            $this->dirUrl . 'js/login.js',
             array('jquery'),
             '1.0.0',
             true
@@ -88,12 +88,12 @@ class PublicRegister
 
     public function loginAwpLocalize()
     {
-        $upload_img_logo = get_option(AdminRegister::$imgLogoName);
+        $upload_img_logo = get_option(AWP_LOGIN_LOGO_OPTION);
         $upload_img_logo = isset($upload_img_logo) && !empty($upload_img_logo) ?
             $upload_img_logo :
             get_site_icon_url();
 
-        $upload_img_back = get_option(AdminRegister::$imgBackName);
+        $upload_img_back = get_option(AWP_LOGIN_BACKGROUND_OPTION);
         $upload_img_back = isset($upload_img_back) && !empty($upload_img_back) ?
             $upload_img_back :
             $this->dirUrl . 'img/slider.jpg';

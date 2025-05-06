@@ -11,39 +11,28 @@
         // Make sure we have the proper AJAX URL from the localized script
         const ajaxUrl = loginAwpFeedback.ajax_url || window.ajaxurl || '/wp-admin/admin-ajax.php';
         
-        const pluginSlug = loginAwpFeedback.plugin_slug;
-        const baseSlug = pluginSlug.split('/')[0];
-        
-        // Set up for deactivation link
-        setupDeactivationFeedback();
-        
-        /**
-         * Set up feedback for deactivation
-         */
-        function setupDeactivationFeedback() {
-            const pluginRow = $('tr[data-slug="' + baseSlug + '"]');
-            const deactivateLink = pluginRow.find('.deactivate a');
-            
-            if (deactivateLink.length) {
-                const originalDeactivateLink = deactivateLink.attr('href');
-                
-                // Replace the default deactivation action with our modal trigger
-                deactivateLink.on('click', function(e) {
-                    e.preventDefault();
-                    showModal(originalDeactivateLink, 'deactivate');
-                });
-            }
-        }
+        // Most comprehensive selector that targets the WordPress deactivation link pattern
+        // This covers various ways the link might appear in the plugins page
+        $(document).on('click', 'tr[data-slug="login-awp"] .deactivate a, .plugins .deactivate a[href*="login_awp.php"], a#deactivate-login-awp', function(e) {
 
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Store the action URL before showing the modal
+            const actionUrl = $(this).attr('href');
+            
+            showModal(actionUrl);
+            return false;
+        });
+        
         /**
          * Show the feedback modal
          * @param {string} actionUrl - The URL to redirect to after submission
-         * @param {string} actionType - 'deactivate'
          */
-        function showModal(actionUrl, actionType) {
+        function showModal(actionUrl) {
             $('#login-awp-feedback-modal').show();
             
-            // Update modal title and text
+            // Update modal title and text with translations
             $('#login-awp-feedback-title').text(loginAwpFeedback.translations.heading || 'Quick Feedback');
             $('#login-awp-feedback-intro').text(loginAwpFeedback.translations.intro || 'If you have a moment, please let us know why you are deactivating Login AWP:');
             $('#login-awp-skip-feedback').text(loginAwpFeedback.translations.skip || 'Skip & Deactivate');

@@ -7,7 +7,7 @@ declare(strict_types=1);
  *
  * @author AWP-Software
  * @since 3.1.0
- * @version 3.2.0
+ * @version 3.2.1
  */
 
 namespace Login\Awp\Admin;
@@ -15,10 +15,10 @@ namespace Login\Awp\Admin;
 class FeedbackManager
 {
     private $dirUrl;
-    public static $activateDateOption = 'login_awp_activation_date';
-    public static $reviewNoticeDismissedOption = 'login_awp_review_notice_dismissed';
-    public static $feedbackEmailOption = 'login_awp_feedback_email';
-    public static $feedbackWebhookOption = 'login_awp_feedback_webhook';
+    public static $activateDateOption = AWP_LOGIN_ACTIVATION_DATE_OPTION;
+    public static $reviewNoticeDismissedOption = AWP_LOGIN_REVIEW_DISMISSED_OPTION;
+    public static $feedbackEmailOption = AWP_LOGIN_FEEDBACK_EMAIL_OPTION;
+    public static $feedbackWebhookOption = AWP_LOGIN_FEEDBACK_WEBHOOK_OPTION;
     public static $feedbackEmailDefault = AWP_LOGIN_FEEDBACK_EMAIL;
     public static $feedbackWebhookDefault = AWP_LOGIN_FEEDBACK_WEBHOOK;
     public static $feedbackEmailDescription = 'Email address where feedback will be sent.';
@@ -40,22 +40,6 @@ class FeedbackManager
         // Only load on admin pages
         if (!is_admin()) {
             return;
-        }
-
-        if (false === get_option(self::$activateDateOption)) {
-            add_option(self::$activateDateOption, time());
-        }
-        // Also add the option for dismissal tracking, default to not dismissed
-        if (false === get_option(self::$reviewNoticeDismissedOption)) {
-            add_option(self::$reviewNoticeDismissedOption, '0');
-        }
-
-        // Initialize feedback options
-        if (false === get_option(self::$feedbackEmailOption)) {
-            add_option(self::$feedbackEmailOption, self::$feedbackEmailDefault);
-        }
-        if (false === get_option(self::$feedbackWebhookOption)) {
-            add_option(self::$feedbackWebhookOption, self::$feedbackWebhookDefault);
         }
 
         // Add scripts and styles for the feedback modal
@@ -82,14 +66,14 @@ class FeedbackManager
             'login-awp-feedback-css',
             $this->dirUrl . 'css/feedback-modal.css',
             array(),
-            '3.2.0'
+            '3.2.1'
         );
 
         wp_enqueue_script(
             'login-awp-feedback-js',
             $this->dirUrl . 'js/feedback-modal.js',
             array('jquery'),
-            '3.2.0',
+            '3.2.1',
             true
         );
 
@@ -437,14 +421,14 @@ class FeedbackManager
 
     public function renderEmailField()
     {
-        $email = get_option('login_awp_feedback_email', get_option('admin_email'));
+        $email = get_option(self::$feedbackEmailOption, get_option('admin_email'));
         echo '<input type="email" name="login_awp_feedback_email" value="' . esc_attr($email) . '" class="regular-text">';
         echo '<p class="description">' . esc_html__('Email address where feedback will be sent.', 'login-awp') . '</p>';
     }
 
     public function renderWebhookField()
     {
-        $webhook = get_option('login_awp_feedback_webhook', '');
+        $webhook = get_option(self::$feedbackWebhookOption, '');
         echo '<input type="url" name="login_awp_feedback_webhook" value="' . esc_attr($webhook) . '" class="regular-text">';
         echo '<p class="description">' . esc_html__('Optional webhook URL where feedback will be sent in JSON format.', 'login-awp') . '</p>';
     }

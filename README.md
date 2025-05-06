@@ -110,6 +110,12 @@ For detailed answers to common questions, please visit our [Wiki](https://github
 
 ## 📝 Changelog
 
+### 3.2.2 (2025-05-05)
+* Fixed additional edge case with deactivation feedback system
+* Enhanced plugin initialization for better reliability
+* Optimized performance for faster page loading
+* Reduced plugin resource usage across all pages
+
 ### 3.2.1 (2025-05-04)
 * Fixed critical error when activating the plugin on certain hosting environments
 * Improved plugin activation to properly initialize feedback options on first install
