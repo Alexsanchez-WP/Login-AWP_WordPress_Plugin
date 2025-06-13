@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/icon-256x256.png" alt="Login AWP Logo" width="128" height="128"/>
+  <img src="assets/banner-772x250.png" alt="Login AWP Logo" width="128" height="128"/>
 </p>
 
 <h1 align="center">Login AWP</h1>
@@ -81,7 +81,7 @@ Login AWP transforms your WordPress login page with a professional, customizable
 3. Click "Install Now" and then "Activate"
 
 ### Manual Installation
-1. Download the latest version from [WordPress.org](https://wordpress.org/plugins/login-awp/) or [GitHub Releases](https://github.com/AWP-Software/Login-AWP_WordPress_Plugin/releases)
+1. Download the latest version from [WordPress.org](https://wordpress.org/plugins/login-awp/) or [GitHub Releases](https://github.com/Alexsanchez-WP/Login-AWP_WordPress_Plugin/releases)
 2. Upload the entire `login-awp` folder to `/wp-content/plugins/` directory
 3. Activate the plugin through the 'Plugins' menu in WordPress
 
@@ -106,7 +106,7 @@ After activation, you can configure Login AWP by navigating to:
 
 ## ❓ Frequently Asked Questions
 
-For detailed answers to common questions, please visit our [Wiki](https://github.com/AWP-Software/Login-AWP_WordPress_Plugin/wiki/Frequently-Asked-Questions).
+For detailed answers to common questions, please visit our [Wiki](https://github.com/Alexsanchez-WP/Login-AWP_WordPress_Plugin/wiki/Frequently-Asked-Questions).
 
 ## 📝 Changelog
 
@@ -166,10 +166,10 @@ This project is licensed under the GNU General Public License v2.0 - see the [LI
 ## 🙏 Credits
 
 - [Vegas2 JS](https://vegas.jaysalvat.com/) - Used for background image transitions
-- All the [contributors](https://github.com/AWP-Software/Login-AWP_WordPress_Plugin/graphs/contributors) who have helped improve this plugin
+- All the [contributors](https://github.com/Alexsanchez-WP/Login-AWP_WordPress_Plugin/graphs/contributors) who have helped improve this plugin
 
 ---
 
 <p align="center">
-  <sub>Developed with ❤️ by <a href="https://github.com/AWP-Software">AWP-Software</a></sub>
+  <sub>Developed with ❤️ by <a href="https://github.com/Alexsanchez-WP">Alexsanchez-WP</a></sub>
 </p>
