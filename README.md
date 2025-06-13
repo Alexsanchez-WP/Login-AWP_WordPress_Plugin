@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/banner-772x250.png" alt="Login AWP Logo" width="128" height="128"/>
+  <img src="assets/banner-772x250.png" alt="Login AWP Logo"/>
 </p>
 
 <h1 align="center">Login AWP</h1>
