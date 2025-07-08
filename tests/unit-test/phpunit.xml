@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+    bootstrap="bootstrap.php"
+    backupGlobals="false"
+    colors="true"
+    convertErrorsToExceptions="true"
+    convertNoticesToExceptions="true"
+    convertWarningsToExceptions="true">
+    <testsuites>
+        <testsuite name="Login AWP Test Suite">
+            <directory prefix="Test" suffix=".php">./Unit</directory>
+        </testsuite>
+    </testsuites>
+    <coverage processUncoveredFiles="true">
+        <include>
+            <directory suffix=".php">../../trunk/src</directory>
+        </include>
+        <exclude>
+            <directory>../../trunk/src/Admin/templates</directory>
+            <file>../../trunk/src/index.php</file>
+            <file>../../trunk/src/Admin/index.php</file>
+            <file>../../trunk/src/Public/index.php</file>
+        </exclude>
+        <report>
+            <html outputDirectory="coverage"/>
+        </report>
+    </coverage>
+</phpunit>

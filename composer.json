@@ -21,8 +21,13 @@
             "Login\\Awp\\": "trunk/src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Login\\Awp\\Tests\\": "tests/"
+        }
+    },
     "scripts": {
-        "test": "phpunit --configuration test/phpunit.xml",
-        "test:coverage": "phpunit --configuration test/phpunit.xml --coverage-html test/coverage"
+        "test": "phpunit --configuration tests\\unit-test\\phpunit.xml",
+        "test:coverage": "phpunit --configuration tests\\unit-test\\phpunit.xml --coverage-html tests\\unit-test\\coverage"
     }
 }
